@@ -1,0 +1,45 @@
+<view class="recharge-wrap page" id="recharge">
+  <view class="select-area" wx:if="{{ itemList.length > 0 || customItemInfo.status == 1 }}">
+    <view class="area-title">储值</view>
+    <view class="select-list">
+      <block wx:for="{{ itemList }}" wx:key="">
+        <view class="select-item {{ ( type == 1 && selectedItem.index == index ) ? 'active' : '' }}" data-index="{{ index }}" catchtap="selectActiveItem" >
+          <view class="recharge-money">{{ item.rechargeMoney }}元</view>
+          <view class="give-money" wx:if="{{ item.giveMoney != 0 }}" >赠送{{ item.giveMoney }}元</view>
+        </view>
+      </block>
+    </view>
+    <view wx:if="{{ customItemInfo.status == 1 }}" class="custom-item {{ type == 6  ? 'active': '' }}" catchtap="selectCustomItem">
+      <view class="item-title">自定义金额</view>
+      <view class="item-price-block">
+        <text class="item-price-symbol">¥</text>
+        <input class="item-price-input" type="digit" placeholder="请输入金额" placeholder-style="color: #cccccc;" bindfocus="selectCustomItem" bindblur="confirmCustomPrice" bindinput="confirmCustomPrice"></input>
+      </view>  
+      <view class="item-tip">{{ customItemInfo.tip }}</view>
+    </view>
+  </view>
+  <view wx:if="{{ type == 1 && selectedItem.description != '' }}" class="instruction-area" >
+    <view class="area-title">储值说明</view>
+    <view class="area-content">{{ selectedItem.description }}</view>
+  </view>
+  <view wx:if="{{ couponItemList.length > 0 }}" class="coupon-area">
+    <view class="area-title">储值券充值</view>
+    <view class="coupon-list">
+      <block wx:for="{{ couponItemList }}" wx:key="">
+        <view class="coupon-item {{ ( type == 5 && selectedCouponItem.index == index ) ? 'active' : '' }}" data-index="{{ index }}" catchtap="selectActiveCouponItem" >
+          <view class="item-title">¥ <text class="price">{{ item.price }}</text> 储值券</view>
+          <view class="division-line">
+            <view class="left-semicircle"></view>
+            <view class="right-semicircle"></view>
+          </view>
+          <view class="bottom-section">
+            <view class="date-duration">{{ item.dateDuration  }}</view>
+            <view class="other-case">{{ item.otherCase }}</view>
+            <view class="time-duration">{{ item.timeDuration }}</view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <view class="recharge-btn" catchtap="gotoRecharge">充值</view>
+</view>

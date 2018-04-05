@@ -1,0 +1,120 @@
+<scroll-view class="communityDetail-wrap" id="communityDetail" scroll-y="true" scroll-x="false" bindscrolltolower="scrollTolower" bindscroll="scrollEvent" lower-threshold="100">
+  <view class="communityDetail-main">
+    <view>
+      <view class="communityDetail-cover community-li-cover {{article_style == 0 ? 'circle' : 'square'}}">
+        <image class="communityDetail-head" src="{{articleInfo.headimgurl}}"></image>
+      </view>
+      <view class="communityDetail-author community-li-author">
+        <view>
+          <text class="communityDetail-name community-li-name">{{articleInfo.nickname}}</text>
+          <view wx:if="{{articleInfo.hot_flag == 1}}" class="community-hot-wrap"><icon class="community-hot ico-moon icon-fire"></icon><text>精品话题</text></view>
+        </view>
+        <view class="communityDetail-time community-li-time"><text class="communityDetail-time-time">{{articleInfo.add_time}}</text> <text>人气 </text><text class="communityDetail-popularity">{{articleInfo.comment_count}}</text></view>
+      </view>
+    </view>
+    <view class="communityDetail-title">{{articleInfo.title}}</view>
+    <view class="communityDetail-img" wx:if="{{articleInfo.content.imgs}}">
+      <view wx:for="{{articleInfo.content.imgs}}" wx:key="" class="{{articleInfo.content.imgs.length == 1 ? 'communityDetail-imgli-one' : 'communityDetail-imgli'}}">
+        <image wx:if="{{articleInfo.content.imgs.length == 1}}" src="{{item}}" data-src="{{item}}" alt="" bindload="imgLoad" mode="widthFix" catchtap="previewImage"></image>
+        <image wx:else src="{{item}}" data-src="{{item}}" mode="widthFix" alt="" catchtap="previewImage"></image>
+      </view>
+    </view>
+    <view class="communityDetail-content">
+      <text class="text-p">{{articleInfo.content_text}}</text>
+    </view>
+    <view class="communityDetail-location-report">
+      <view class="communityDetail-location" wx:if="{{address}}"><label class="ico-moon icon-community-location"></label>{{address}}</view>
+      <view class="communityDetail-report-wrap" catchtap='turnToReport'>
+        <label class="ico-moon icon-community-report"></label>
+        <text class="communityDetail-report">举报</text>
+      </view>
+    </view>
+    <!-- <view class="communityDetail-like">
+      <view class="communityDetail-like-title">
+        赞过的人
+      </view>
+      <view class="communityDetail-like-ul">
+        <view wx:for="{{likeLogItems}}" wx:key="" class="communityDetail-like-li"><image src="{{item.headimgurl}}" ></image></view>
+        <text wx:if="{{likeLogItems.length == 0}}">还没有人点赞哦</text>
+      </view>
+      <view class="communityDetail-likebtn" style="background-color:{{thumbUpBackgroundColor}};" data-liked="{{articleInfo.is_liked}}" catchtap="articleLike">
+      <label class="ico-moon icon-community_praise_fill" style="color:{{thumbUpColor}};"></label>
+      <text class="communityDetail-likebtn-likecount" style="color:{{thumbUpColor}};">{{likeLogCount}}</text>
+    </view>
+    </view> -->
+  </view>
+  <view class="communityDetail-art">
+  <view class="communityDetail-all-post">全部评论（{{commentCount}}）<view class="communityDetail-likeCount" wx:if="{{likeLogItems.length > 0}}"><text style="color:{{theme_color}}">{{likeLogItems.length}}</text>赞</view></view>
+  <view class="communityDetail-list">
+    <view class="communityDetail-ul">
+      <view wx:for="{{commentList}}" wx:key="" class="communityDetail-item" data-id="{{item.id}}">
+        <view>
+          <view class="community-li-cover">
+            <image  src="{{item.content.headimgurl ? item.content.headimgurl : 'http://www.zhichiwangluo.com/static/pc2/common/images/portrait.jpg'}}"></image>
+          </view>
+          <view class="community-li-author">
+            <text class="community-li-name" data-id="{{item.id}}">{{item.content.nickname}}</text>
+            <text class="communityDetail-floor">{{index + 1}}楼</text>   
+            <text class="community-li-time">{{item.content.add_time}}</text>
+          </view>
+          <view class="communityDetail-item-right-top">
+            <view class="communityDetail-item-reply tail-info" data-id="{{item.id}}" data-sectionid="{{item.section_id}}" data-parentid="{{item.parent_comment_id}}" data-replyto="{{item.content.nickname}}" catchtap="turnReply">
+              <icon class="ico-moon icon-community_message"></icon>
+            </view>
+            <view class="communityDetail-item-like tail-info" data-liked="{{item.is_liked}}" data-id="{{item.id}}" data-index="{{index}}" catchtap="commentLike" style="color:{{item.is_liked == 1 ? '#999' : '#999'}};">
+              <icon class="ico-moon {{item.is_liked == 1 ? 'icon-community_praise_fill' : 'icon-community_praise'}}"></icon>
+              <text>{{item.like_count_text}}</text>
+              <view hidden="{{item.likeAnimateShow}}" class="like-animate">{{item.is_liked == 1 ? '+1' : '-1'}}</view>
+            </view>
+          </view>
+        </view>
+        <view class="communityDetail-item-content" data-id="{{item.id}}" data-sectionid="{{item.section_id}}" data-parentid="{{item.parent_comment_id}}" catchtap="turnReply" data-replyto="{{item.content.reply_to.nickname}}">
+          <text><text wx:if="{{item.content.reply_to}}" class="communityDetail-replyto" catchtap="turnComment">@{{item.content.reply_to.nickname}}</text>{{item.content.text}}</text>
+        </view>
+        <view wx:if="{{item.child_comment.data.length > 0}}" class="communityDetail-reply-wrap">
+          <view class="communityDetail-reply" wx:for="{{item.child_comment.data}}" wx:key="" catchtap="turnComment" data-sectionid="{{articleInfo.section_id}}" data-parentid ="{{item.parent_comment_id}}" data-replyto="{{item.nickname}}" data-id = "{{item.id}}">
+            <view class="communityDetail-reply-title">
+              <text class="communityDetail-reply-nickname">{{item.nickname}}</text>
+              <text class="communityDetail-reply"> 回复 </text>
+              <text class="communityDetail-reply-nickname replyto">{{item.content.reply_to.nickname}}</text>
+              <text class="communityDetail-reply">：</text>              
+            </view>
+            <view class="communityDetail-reply-content">{{item.content.text}}</view>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{getCommentData.nomore && commentList.length <= 0}}" class="communityDetail-li-none">
+        <image src="http://testfe.zhichiwangluo.com/static/webapp/images/none.png" mode="aspectFill" alt=""></image>
+        <text>快来抢沙发</text>
+      </view>
+      <view wx:if="{{getCommentData.nomore && commentList.length > 0}}" class="communityDetail-li-nomore">没有更多了</view>
+    </view>
+  </view>
+  </view>
+  <view class="communityDetail-bottom" wx:if="{{!showReplyBox}}">
+    <icon class="communityDetail-likebtn2 ico-moon icon-leftarrow" catchtap="backToPre"></icon>
+    <button class="communityDetail-btn" data-sectionid="{{articleInfo.section_id}}" catchtap="turnComment" data-replyto="我来说两句" data-id="0" data-parentid="0"  style="width:{{phoneNumber ? '40%' : '60%'}}">来说说我的看法...</button>
+    <button class="communityDetail-likebtn2 ico-moon icon-community_share {{phoneNumber ? 'hasPhone' : ''}}" open-type="share"></button>
+    <button class="communityDetail-likebtn2 ico-moon {{articleInfo.is_liked == 1 ? 'icon-community_praise_fill' : 'icon-community_praise'}} {{phoneNumber ? 'hasPhone' : ''}}" data-liked="{{articleInfo.is_liked}}" catchtap="articleLike" style="color:{{articleInfo.is_liked == 1 ? '#999': ''}};"></button>
+    <view class="communityDetail-phone" wx:if="{{phoneNumber}}" style="background:{{theme_color}}" catchtap="showActionSheet">联系Ta</view>
+  </view>
+  
+  <!-- <view class="goods-opt-item customer-service">
+    <view class="ico-moon icon-community-ai communityDetail-likebtn3"> 
+      <contact-button type="default-dark" size="20" session-from="goodsDetail"></contact-button>
+    </view>
+  </view> -->
+</scroll-view>
+<view class="actionSheet-wrap" wx:if="{{showActionSheet}}">
+  <view class="actionSheet-buttons">
+    <button class="phoneNum-btn">{{phoneNumCall}}</button>
+    <button class="call-btn" catchtap="makePhoneCall">呼叫</button>
+    <button class="cancel-btn" catchtap="closeActionSheet">取消</button>
+  </view>
+</view>
+<view class="communityDetail-reply-mask" wx:if="{{showReplyBox}}">
+<view class="communityDetail-reply-box">
+  <view class="reply-box-top"><text class="cancel-reply" catchtap="cancelReply">取消</text><text class="publish-reply" catchtap="submitReply" style="color:{{replyParam.text ? '' : '#999'}}">发表</text></view>
+  <view><textarea class="article-reply-input" id="" placeholder="{{replyPlaceholder}}" maxlength="-1" cursor-spacing="80" fixed="true" value="{{replyParam.text}}" bindinput="replyInput" placeholder-style="color: #999;" focus="{{showReplyBox}}"></textarea></view>
+</view>
+</view>

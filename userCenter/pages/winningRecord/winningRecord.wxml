@@ -1,0 +1,23 @@
+<view class="winningRecord page" id="winningRecord">
+<view class="record-tab-list">
+   <view data-index="1" class="{{ currentTabIndex == 1 ? 'active' : '' }}" catchtap="clickTap">大转盘</view>
+   <view data-index="2" class="{{ currentTabIndex == 2 ? 'active' : '' }}" catchtap="clickTap">砸金蛋</view>
+   <view data-index="3" class="{{ currentTabIndex == 3 ? 'active' : '' }}" catchtap="clickTap">刮刮乐</view>
+</view>
+<view class="record-content-body">
+ <view class="scrollContainer">
+  <scroll-view scroll-y="">
+   <view class="record-wrap-list" wx:for="{{myPrizeList}}" wx:key="" data-id="{{item.id}}" hidden="{{myPrizeList==''}}">
+    <view class="record-name">{{item.prize_level}}:{{item.prize_title}}</view>
+    <view class="record-start">
+     <view class="record-apply">使用日期：{{item.start_use_date}}至{{item.end_use_date}}</view>
+     <view class="record-staus" style="color:#ff7100;">{{item.is_selected=='0'?'未使用':'已使用'}}</view>
+    </view>
+    <view class="record-end">中奖时间：{{item.add_time}}</view>
+   </view>
+   <view class="record-none" hidden="{{myPrizeList!=''}}">暂无任何中奖记录</view>
+  </scroll-view>
+ </view>
+ <!-- <view class="scrollContainer" hidden="{{currentTabIndex!=1}}"></view> -->
+</view>
+</view>

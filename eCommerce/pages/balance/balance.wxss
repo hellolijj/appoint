@@ -1,0 +1,96 @@
+#balance {
+  min-height: 100vh;
+  background-color: #EFEFEF 
+}
+#balance .balance-content {
+  height: 100vh;
+}
+#balance .balance-detail {
+  position: relative;
+  background: #ff6602;
+  height: 107px;
+  color: #fff;
+}
+#balance .balance-detail .detail-text {
+  position: absolute;
+  top: 26px;
+  left: 15px;
+  font-size: 14px;
+}
+#balance .balance-detail .detail-num {
+  position: absolute;
+  left: 15px;
+  top: 55px;
+  font-size: 25px;
+}
+#balance .balance-detail .detail-recharge {
+  position: absolute;
+  top: 55px;
+  right: 15px;
+  width: 64px;
+  height: 25px;
+  text-align: center;
+  line-height: 25px;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  font-size: 12px;
+}
+#balance .message-content {
+  display: block;
+}
+#balance .message-item {
+  position: relative;
+  margin: 0;
+  width: 100%;
+  height: 64px;
+  background: #fff;
+
+}
+#balance .message-item:last-child {
+  margin-bottom: 16px;
+}
+#balance .message-item::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 15px;
+  width: calc(100% - 30px);
+  border-bottom: 1px solid #eee;
+}
+#balance .message-item:last-child::after {
+  display: none;
+}
+#balance .message-item .message-title {
+  position: absolute;
+  top: 13px;
+  left: 15px;
+  color: #212121;
+  font-size: 15px;
+}
+#balance .message-item .message-num {
+  position: absolute;
+  top: 13px;
+  right: 15px;
+  overflow: hidden;
+  font-size: 15px;
+}
+#balance .message-item .message-num.add {
+  color: #ff6602;
+}
+#balance .message-item .message-num.minus {
+  color: #666;
+}
+#balance .message-item .message-balance {
+  position: absolute;
+  top: 40px;
+  left: 15px;
+  color: #AAAAAA;
+  font-size: 12px;
+}
+#balance .message-item .message-time {
+  position: absolute;
+  top: 40px;
+  right: 15px;
+  color: #AAAAAA;
+  font-size: 12px;
+}

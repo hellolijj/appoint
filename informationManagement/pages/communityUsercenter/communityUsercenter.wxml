@@ -1,0 +1,87 @@
+<view class="communityUsercenter-wrap" id="communityUsercenter">
+  <view class="communityUsercenter-head">
+    <icon class="communityUsercenter-back ico-moon icon-leftarrow" catchtap="turnBack"></icon>
+    <view class="communityUsercenter-tab">
+      <view class="{{tabActive == 'publish' ? 'active' : ''}}" data-type="publish" catchtap="changeTab" style="color:{{tabActive == 'publish' ? theme_color : ''}};border-color:{{tabActive == 'publish' ? theme_color : ''}};">发布（{{myArticleCount}}）</view>
+      <view class="{{tabActive == 'reply' ? 'active' : ''}}" data-type="reply" catchtap="changeTab" style="color:{{tabActive == 'reply' ? theme_color : ''}};border-color:{{tabActive == 'reply' ? theme_color : ''}};">回帖（{{myCommentCount}}）</view>
+    </view>
+  </view>
+  <view class="communityUsercenter-content" id="communityUsercenter-content">
+    <scroll-view class="communityUsercenter-scrollwrap {{tabActive == 'publish' ? 'active' : ''}}" data-type="publish" scroll-y="true" bindscrolltolower="myArticleScroll">
+      <view class="communityUsercenter-mytopic-ul">
+        <view class="communityUsercenter-li" wx:for="{{myArticleList}}" wx:key="sInd" wx:for-index="sInd" data-id="{{item.id}}">
+          <view>
+            <view class="community-li-cover">
+              <image src="{{item.headimgurl}}"></image>
+            </view>
+            <view class="community-li-author">
+              <view><text class="community-li-name">{{item.nickname}}</text><text class="community-stick" wx:if="{{item.top_flag == 1}}">置顶</text><text class="community-hot" wx:if="{{item.hot_flag == 1}}">精品</text></view>
+              <text class="community-li-time">{{item.add_time}}</text>
+            </view>
+            <view class="communityUsercenter-myli-audit {{item.article_status == 2 ? 'audit-stop' : item.article_status == 3 ? '' : item.audit_status == 1 ? 'audit-success' : item.audit_status == 2 ? 'audit-fail' : ''}}" catchtap="turnToFailpass" data-id="{{item.id}}" data-audit="{{item.audit_status}}"><label class="ico-moon icon-community-stop" wx:if="{{item.article_status == 2}}"></label>{{item.article_status == 2 ? '屏蔽' : item.article_status == 3 ? '申诉中' : item.audit_status == 0 ? '待审核' : item.audit_status == 1 ? '通过' : item.audit_status == 2 ? '己拒绝' : ''}}</view>
+          </view>
+          <view data-id="{{item.id}}" data-sid="{{item.section_id}}" data-verify="0" catchtap="turnToDetail">
+            <text class="communityUsercenter-myli-title" >{{item.title}}</text>
+            <view class="communityUsercenter-myli-content">
+              <text class="text-p">{{item.content_text}}</text>
+            </view>
+            <view wx:if="{{item.content.imgs}}" class="communityUsercenter-imgli-wrap">
+              <view wx:for="{{item.content.imgs}}" wx:key="" wx:for-item="it" wx:for-index="itIdx" style="display:{{itIdx > 8 ? 'none' : 'inline-block'}}" class="{{item.content.imgs.length == 1 ? 'communityUsercenter-imgli-one' : 'communityUsercenter-imgli'}}">
+                <image wx:if="{{item.content.imgs.length == 1}}" src="{{it}}" data-index="{{sInd}}" alt="" bindload="imgLoad" style="width:{{imgData[sInd].imgWidth}}rpx;height:{{imgData[sInd].imgHeight}}rpx;" ></image>
+                <image wx:else src="{{it}}" mode="aspectFill" alt="" ></image>
+              </view>
+            </view>
+          </view>
+          <view class="communityUsercenter-myli-foot">
+            <view class="communityUsercenter-myli-info"><icon class="ico-moon icon-more" data-id="{{item.id}}" data-index="{{sInd}}" bindtap="showMore"></icon>
+              <view class="communityUsercenter-myli-more"></view>
+            </view>
+            <view class="communityUsercenter-myli-info"><icon class="ico-moon icon-community_like"></icon><text>{{item.like_count}}</text></view>
+            <view class="communityUsercenter-myli-info"><icon class="ico-moon icon-community_message"></icon><text>{{item.comment_count}}</text></view>
+          </view>
+        </view>
+        <view wx:if="{{getMyArticleData.nomore}}" class="communityUsercenter-li-none">没有更多了</view>
+      </view>
+    </scroll-view>
+    <scroll-view class="communityUsercenter-scrollwrap {{tabActive == 'reply' ? 'active' : ''}}" data-type="reply" scroll-y="true" bindscrolltolower="myCommentScroll">
+      <view class="communityUsercenter-myreply-ul">
+        <view class="communityUsercenter-li" wx:for="{{myCommentList}}" wx:key="" data-id="{{item.id}}">
+          <view>
+            <view class="community-li-cover">
+              <image src="{{item.headimgurl}}"></image>
+            </view>
+            <view class="community-li-author">
+              <text class="community-li-name text-p">{{item.nickname}}</text>
+              <text class="community-li-time text-p">{{item.add_time}}</text>
+            </view>
+          </view>
+          <view class="communityUsercenter-reply-li-content">
+            <text class="text-p"><text wx:if="{{item.comment_id != 0 && !!item.comment_id}}" class="communityUsercenter-replyto">@{{item.content.reply_to.nickname}}</text>{{item.content_text}}</text>
+          </view>
+          <view class="communityUsercenter-reply-li-post" data-id="{{item.obj_id}}" data-sid="{{item.section_id}}" catchtap="turnToDetail">
+            <image wx:if="{{item.obj.content.imgs}}" src="{{item.obj.content.imgs[0]}}"></image><text>{{item.obj.title}}</text>
+          </view>
+          <view class="communityUsercenter-myli-foot">
+            <view class="communityUsercenter-myli-info" data-id="{{item.id}}" data-obj_id="{{item.obj_id}}" data-index="{{index}}" bindtap="deleteComment"><icon class="ico-moon icon-delete"></icon></view>
+          </view>
+        </view>
+        <view wx:if="{{myCommentData.nomore}}" class="communityUsercenter-li-none">没有更多了</view>
+      </view>
+    </scroll-view>
+  </view>
+  <view class="communityUsercenter-appeal-mask" id="communityUsercenter-appeal" wx:if="{{showAppeal}}">
+		<view class="communityUsercenter-appeal-window">
+			<view class="appeal-top"><text>申诉</text><text class="close-appealWindow ico-moon icon-closes" catchtap="changeAppealState"></text></view>
+			<view><textarea name="appeal-reason" id="communityUsercenter-appealReason" placeholder="申诉原因" value="{{appealReason}}" bindinput="appealInput" maxlength="-1"></textarea></view>
+			<view class="bottom-button"><button class="submit-btn" data-id="{{appealId}}" catchtap="submitAppeal">提交</button></view>
+		</view>
+	</view>
+</view>
+<view class="actionSheet-wrap" wx:if="{{showActionSheet}}">
+  <view class="actionSheet-buttons">
+    <button class="appeal-btn" wx:if="{{showAppealBtn}}" catchtap="changeAppealState">话题申诉</button>
+    <button class="edit-btn" catchtap="turnToCommunityPublish">编辑话题</button>
+    <button class="delete-btn" catchtap="deleteArticle">删除话题</button>
+    <button class="cancel-btn" catchtap="closeActionSheet">取消</button>
+  </view>
+</view>

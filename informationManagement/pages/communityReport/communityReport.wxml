@@ -1,0 +1,32 @@
+<view id="communityReport" class="page">
+  <view class="communityReport-title">请告诉我们你想举报该话题的理由</view>
+  <radio-group class="comunityReport-reasonOptions" bindchange="changeOption">
+    <view class="option-item">
+      <text>诽谤谩骂</text>
+      <radio color="{{theme_color ? theme_color : '#3091f2'}}" value="0" checked="{{param.complaint_id == 0 ? true : false}}"/>
+    </view>
+    <view class="option-item">
+      <text>淫秽色情</text>
+      <radio color="{{theme_color ? theme_color : '#3091f2'}}" value="1" checked="{{param.complaint_id == 1 ? true : false}}"/>
+    </view>
+    <view class="option-item">
+      <text>垃圾广告</text>
+      <radio color="{{theme_color ? theme_color : '#3091f2'}}" value="2" checked="{{param.complaint_id == 2 ? true : false}}"/>
+    </view>
+    <view class="option-item">
+      <text>血腥暴力</text>
+      <radio color="{{theme_color ? theme_color : '#3091f2'}}" value="3" checked="{{param.complaint_id == 3 ? true : false}}"/>
+    </view>
+    <view class="option-item">
+      <text>违法行为（涉毒、暴恐、违禁品等）</text>
+      <radio color="{{theme_color ? theme_color : '#3091f2'}}" value="4" checked="{{param.complaint_id == 4 ? true : false}}"/>
+    </view>
+  </radio-group>
+  <view class="communityReport-otherReason">
+    <view>其他</view>
+    <textarea id="communityReport-otherReasonInput"  data-value="5" placeholder="请输入举报理由" rows="" cols="" bindfocus="getInput" bindinput="inputReason" value="{{param.additional_text}}" maxlength="-1"></textarea>
+  </view>
+  <view class="communityReport-buttons">
+    <button class="submit-btn {{cando ? 'cando' : ''}}" catchtap="handleReport" style="background:{{theme_color}}">举报</button>
+  </view>
+</view>

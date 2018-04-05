@@ -1,0 +1,120 @@
+/* 未通过审核页面 */
+#communityNotAudit {
+  background: #fff;
+}
+.communityNotAudit-top {
+  height: 145px;
+  background: rgba(0, 0, 0, .4);
+}
+.communityNotAudit-top .communityFailpass-logo {
+  position: relative;
+  display: inline-block;
+  margin-top: 39px;
+  margin-left: 18px;
+  margin-right: 12px;
+  padding-top: 10px;
+  padding-right: 10px;
+  width: 68px;
+  height: 68px;
+}
+.communityFailpass-logo > view {
+  box-sizing: border-box;
+  padding: 15px 8px;
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  background: #c2c2c2;
+}
+.communityFailpass-logo text {
+  display: block;
+  margin-bottom: 5px;
+  height: 5px;
+  background: #d8d8d8;
+}
+.communityFailpass-logo > label {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+  background: #ff8858;
+  font-size:16px;
+  color:#fff;
+}
+.communityFailpass-logo text.line-1 {
+  margin-bottom: 10px;
+  width: 50%;
+}
+.communityNotAudit-top .top-text {
+  display: inline-block;
+  padding-top: 39px;
+  vertical-align: top;
+}
+.communityNotAudit-top .top-title {
+  display: block;
+  padding-top: 20px;
+  line-height: 20px;
+  color: #fff;
+}
+.communityNotAudit-top .top-description {
+  display: block;
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+}
+.notAudit-reason {
+  padding: 18px;
+  padding-bottom: 12px;
+}
+.reason-title {
+  display: block;
+  height: 28px;
+  font-size: 14px;
+  color: #999;
+}
+.reason-content {
+  display: block;
+  padding-bottom: 10px;
+  font-size: 12px;
+  line-height: 20px;
+  border-bottom: 1px solid #eee;
+}
+.article-area {
+  padding: 0 18px;
+}
+.article-title {
+  font-size: 14px;
+  color: #999;
+}
+.article-item image {
+  position: absolute;
+  margin: 13px 0;
+  width: 43px;
+  height: 43px;
+  background: #eee;
+}
+.article-item .article-text {
+  padding-left: 43px;
+  vertical-align: top;
+  line-height: 20px;
+}
+.article-item .article-title {
+  display: block;
+  padding-left: 13px;
+  padding-top: 16px;
+  font-weight: bold;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.article-item .article-description {
+  display: block;
+  padding-left: 13px;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

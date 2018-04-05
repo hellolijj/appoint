@@ -1,0 +1,233 @@
+<view class="app" hidden="{{page_hidden}}"><web-view wx-if="{{false}}" src="{{false}}"></web-view><component-share pageQRCodeData="{{pageQRCodeData}}"></component-share>
+<component-backhome backToHomePage="{{backToHomePage}}"></component-backhome>
+<component-reward-point rewardPointObj="{{rewardPointObj}}"></component-reward-point>
+<component-shop-vip shopVipModal="{{shopVipModal}}"></component-shop-vip>
+<template name="zcCarousel">
+  <swiper indicator-dots="true" circular="true" autoplay="{{data.customFeature.autoplay}}" vertical="{{data.customFeature.vertical}}" interval="{{data.customFeature.interval*1000}}" duration="750" indicator-color="{{ data.customFeature.indicatorColor }}" indicator-active-color="{{ data.customFeature.indicatorActiveColor }}" style="{{data.style}}">
+    <block wx:for="{{data.content}}" wx:key="">
+      <swiper-item data-event-params="{{item.eventParams}}" catchtap="{{item.eventHandler}}">
+        <image class="swiper-item" src="{{item.pic}}"/>
+        <view  wx:if="{{item.eventHandler == 'tapVideoPlayHandler'}}" class="carousel-video-play icon-play ico-moon"></view>
+      </swiper-item>
+    </block>
+  </swiper>
+</template>
+<template name="carouselVideoPlay">
+  <view class="carouselVideoPlay" hidden="{{!data.videoUrl}}" catchtouchmove>
+    <view class="carouselVideoPlay-inner">
+      <view class="carouselVideoPlay-close icon-closes ico-moon" data-compid="{{data.compId}}" bindtouchend="carouselVideoClose" ></view>
+      <video src="{{data.videoUrl}}" controls autoplay='autoplay'></video>
+    </view>
+  </view>
+</template>
+<view class="ele-container">
+  <template is="zcCarousel" data="{{data:carousel1}}"></template>
+</view>
+<template is="carouselVideoPlay" data="{{data:carousel1}}"></template>
+<import src="../../components/wxParse/wxParse.wxml"/>
+<template name="zcFreeVessel2">
+  <view class="element free-vessel" style="{{data.style}}" data-event-params="{{data.eventParams}}" catchtap="{{data.eventHandler}}">
+    <wxs module="pictureWxsModule">
+var isArray = function(array) {
+  return array.join ? true : false;
+}
+module.exports.isArray = isArray;
+</wxs>
+<template name="zcPicture">
+  <block wx:if="{{real_value && (data.customFeature.action !== 'call' || data.customFeature.phoneDisplayContent !== 'static')}}">
+    <block wx:if="{{pictureWxsModule.isArray(real_value)}}">
+      <view data-compdata="{{ data }}" data-real-value="{{ real_value }}" class="element picture" style="{{data.style}}" data-event-params="{{data.eventParams}}" data-imgArr="{{real_value}}" catchtap="{{data.eventHandler}}" wx:for="{{real_value}}" wx:key=""> 
+        <image src="{{real_value[index]}}" mode="scaleToFill"></image>
+      </view>
+    </block>
+    <block wx:else>
+      <view data-compdata="{{ data }}" class="element picture" style="{{data.style}}" data-event-params="{{data.eventParams}}" data-imgArr="{{real_value}}" catchtap="{{data.eventHandler}}">
+        <image src="{{real_value}}" mode="scaleToFill"></image>
+      </view>
+    </block>
+  </block>
+  <block wx:else>
+    <view data-compdata="{{ data }}" data-real-value="{{ real_value }}" class="element picture" style="{{data.style}}" data-event-params="{{data.eventParams}}" data-imgArr="{{data.content}}" catchtap="{{data.eventHandler}}">
+      <image src="{{data.content}}" mode="scaleToFill"></image>
+    </view>
+  </block>
+</template>
+<view class="ele-container">
+  <block wx:if="{{real_value}}">
+    <template is="zcPicture" data="{{data:data.content[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{detail_data && in_dynamic_vessel !== 'true'}}">
+    <template is="zcPicture" data="{{data:data.content[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{in_dynamic_vessel === 'true'}}">
+    <template is="zcPicture" data="{{data:data.content[0], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:else>
+    <template is="zcPicture" data="{{data:data.content[0], detail_data: detail_data}}"></template>
+  </block>
+</view><wxs module="pictureWxsModule">
+var isArray = function(array) {
+  return array.join ? true : false;
+}
+module.exports.isArray = isArray;
+</wxs>
+<template name="zcPicture">
+  <block wx:if="{{real_value && (data.customFeature.action !== 'call' || data.customFeature.phoneDisplayContent !== 'static')}}">
+    <block wx:if="{{pictureWxsModule.isArray(real_value)}}">
+      <view data-compdata="{{ data }}" data-real-value="{{ real_value }}" class="element picture" style="{{data.style}}" data-event-params="{{data.eventParams}}" data-imgArr="{{real_value}}" catchtap="{{data.eventHandler}}" wx:for="{{real_value}}" wx:key=""> 
+        <image src="{{real_value[index]}}" mode="scaleToFill"></image>
+      </view>
+    </block>
+    <block wx:else>
+      <view data-compdata="{{ data }}" class="element picture" style="{{data.style}}" data-event-params="{{data.eventParams}}" data-imgArr="{{real_value}}" catchtap="{{data.eventHandler}}">
+        <image src="{{real_value}}" mode="scaleToFill"></image>
+      </view>
+    </block>
+  </block>
+  <block wx:else>
+    <view data-compdata="{{ data }}" data-real-value="{{ real_value }}" class="element picture" style="{{data.style}}" data-event-params="{{data.eventParams}}" data-imgArr="{{data.content}}" catchtap="{{data.eventHandler}}">
+      <image src="{{data.content}}" mode="scaleToFill"></image>
+    </view>
+  </block>
+</template>
+<view class="ele-container">
+  <block wx:if="{{real_value}}">
+    <template is="zcPicture" data="{{data:data.content[1], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{detail_data && in_dynamic_vessel !== 'true'}}">
+    <template is="zcPicture" data="{{data:data.content[1], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{in_dynamic_vessel === 'true'}}">
+    <template is="zcPicture" data="{{data:data.content[1], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:else>
+    <template is="zcPicture" data="{{data:data.content[1], detail_data: detail_data}}"></template>
+  </block>
+</view><wxs module="pictureWxsModule">
+var isArray = function(array) {
+  return array.join ? true : false;
+}
+module.exports.isArray = isArray;
+</wxs>
+<template name="zcPicture">
+  <block wx:if="{{real_value && (data.customFeature.action !== 'call' || data.customFeature.phoneDisplayContent !== 'static')}}">
+    <block wx:if="{{pictureWxsModule.isArray(real_value)}}">
+      <view data-compdata="{{ data }}" data-real-value="{{ real_value }}" class="element picture" style="{{data.style}}" data-event-params="{{data.eventParams}}" data-imgArr="{{real_value}}" catchtap="{{data.eventHandler}}" wx:for="{{real_value}}" wx:key=""> 
+        <image src="{{real_value[index]}}" mode="scaleToFill"></image>
+      </view>
+    </block>
+    <block wx:else>
+      <view data-compdata="{{ data }}" class="element picture" style="{{data.style}}" data-event-params="{{data.eventParams}}" data-imgArr="{{real_value}}" catchtap="{{data.eventHandler}}">
+        <image src="{{real_value}}" mode="scaleToFill"></image>
+      </view>
+    </block>
+  </block>
+  <block wx:else>
+    <view data-compdata="{{ data }}" data-real-value="{{ real_value }}" class="element picture" style="{{data.style}}" data-event-params="{{data.eventParams}}" data-imgArr="{{data.content}}" catchtap="{{data.eventHandler}}">
+      <image src="{{data.content}}" mode="scaleToFill"></image>
+    </view>
+  </block>
+</template>
+<view class="ele-container">
+  <block wx:if="{{real_value}}">
+    <template is="zcPicture" data="{{data:data.content[2], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{detail_data && in_dynamic_vessel !== 'true'}}">
+    <template is="zcPicture" data="{{data:data.content[2], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:elif="{{in_dynamic_vessel === 'true'}}">
+    <template is="zcPicture" data="{{data:data.content[2], detail_data: detail_data}}"></template>
+  </block>
+  <block wx:else>
+    <template is="zcPicture" data="{{data:data.content[2], detail_data: detail_data}}"></template>
+  </block>
+</view>
+  </view>
+</template>
+<view class="ele-container">
+<block wx:if="{{real_value}}">
+  <template is="zcFreeVessel2" data="{{data:free_vessel2, real_value:real_value, detail_data: detail_data}}"></template>
+</block>
+<block wx:else>
+  <template is="zcFreeVessel2" data="{{data:free_vessel2, real_value:item, detail_data: detail_data ,index:index,item : item , parentType : free_vessel2.parentCompid , page_form : free_vessel2.page_form , dataId : dataId}}"></template>
+</block>
+</view>
+<template name="zcTitle">
+  <view class="element title-ele {{ 'title-mode'+ (data.mode ? data.mode : '') }}" mode="{{data.mode}}" style="{{data.style}}" data-event-params="{{data.eventParams}}" catchtap="{{data.eventHandler}}">
+    <view class="title-content">
+      <view class="title-text">
+        <text class="mark" style="{{'background-color: ' + data.markColor}}"></text>
+        <text class="js-text">{{data.content}}</text>
+      </view>
+    </view>
+  </view>
+</template>
+<view class="ele-container">
+  <template is="zcTitle" data="{{data:title_ele3, detail_data: detail_data}}"></template>
+</view>
+<template name="zcCommunityList">
+  <view class="element community-list"
+               data-compid="community4"
+               style='{{data.style}}'>
+    <view class="js-list-container" data-list-index="0">
+      <view class="community-list-item background-ele router js-to-detail"
+            wx:for="{{data.community_data}}" wx:key="" data-id="{{item.id}}" style="{{data.liStyle}}"
+            catchtap="turnToCommunityPage"
+            >
+        <view class="inner-content">
+          <image class="list-img" src="{{item.img}}" style="{{data.imgStyle}}"></image>
+          <view class="title-container">
+            <view class="title">
+              <text class="community-title">{{item.name}}</text>
+              <text class="topic-num" style="{{data.secStyle}}">话题 {{item.xcx_article_count}}</text>
+            </view>
+            <view>
+              <view class="community-desc" style="{{data.secStyle}}">{{item.description}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+<view class="ele-container">
+  <template is="zcCommunityList" data="{{data:community4}}"></template>
+</view>
+<template name="zcSuspension">
+  <view class="element suspension {{data.customFeature.mode == 1 ? 'suspension-sideways' : ''}}"
+               data-compid="suspension5"
+               style="{{data.style}}bottom: {{data.suspension_bottom}}rpx;" >
+    <view class="" wx:for="{{data.content}}"
+          wx:key= ""
+          data-event-params="{{item.eventParams}}"
+          catchtap="{{item.eventHandler}}">
+      <view wx:if="{{item.customFeature.action == 'contact'}}" class="suspension-item diy" style="{{data.list_style}}">
+        <contact-button type="default-dark" size="20" session-from="suspension"></contact-button>
+        <image style="width:{{data.customFeature.width}};height:{{data.customFeature.height}}" src="{{item.pic}}"></image>
+      </view>
+      <view wx:else class="suspension-item diy" style="{{data.list_style}}">
+        <image class="old-and-new" style="width:{{data.customFeature.width}};height:{{data.customFeature.height}}" src="{{item.pic}}"></image>
+      </view>
+    </view>
+    <view class="old-suspension" wx:if="{{data.customFeature.appendComponent}}">
+      <view class="suspension-item" data-type="service" wx:if="{{data.customFeature.appendComponent.service}}" style="{{data.list_style}}">
+        <icon class="ico-moon icon-service2 suspension-service">
+          <contact-button type="default-dark" size="20" session-from="suspension"></contact-button>
+        </icon>
+      </view>
+      <view class="suspension-item" data-router="myOrder" wx:if="{{data.customFeature.appendComponent.myOrder}}" catchtap="suspensionTurnToPage" style="{{data.list_style}}">
+        <icon class="ico-moon icon-notebook"></icon>
+      </view>
+      <view class="suspension-item" data-router="shoppingCart" wx:if="{{data.customFeature.appendComponent.shoppingCart}}" catchtap="suspensionTurnToPage" style="{{data.list_style}}">
+        <icon class="ico-moon icon-shoppingcart"></icon>
+      </view>
+      <view class="suspension-item" data-type="top" wx:if="{{data.customFeature.appendComponent.top}}" catchtap="scrollPageTop" style="{{data.list_style}}">
+        <icon class="ico-moon icon-top"></icon>
+      </view>
+    </view>
+  </view>
+</template>
+
+<template is="zcSuspension" data="{{data:suspension5}}"></template>
+
+</view>

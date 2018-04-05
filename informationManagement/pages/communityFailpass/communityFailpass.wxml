@@ -1,0 +1,33 @@
+<view id="communityFailpass">
+	<view class="communityNotAudit-top">
+		<view class="communityFailpass-logo">
+      <view>
+        <text class="line-1"></text>
+        <text class="line-2"></text>
+        <text class="line-3"></text>
+        <text class="line-4"></text>
+      </view>
+      <label class="ico-moon icon-closes"></label>
+    </view><view class="top-text">
+			<text class="top-title">很抱歉</text>
+			<text class="top-description">你的帖子未通过审核</text>
+		</view>
+	</view>
+	<view class="main-content">
+		<view class="notAudit-reason">
+			<text class="reason-title">原因如下</text>
+			<text class="reason-content">{{articleInfo.audit_reason}}</text>
+		</view>
+		<view class="article-area">
+			<text class="article-title">话题信息</text>
+			<view class="article-list">
+				<view class="article-item" bindtap="turnToDetail">
+					<image class="article-img" src="{{articleInfo.content.imgs[0] ? articleInfo.content.imgs[0] : articleInfo.headimgurl}}" alt=""></image><view class="article-text">
+						<text class="article-title">{{articleInfo.title}}</text>
+						<text class="article-description">{{articleInfo.content.text}}</text>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>

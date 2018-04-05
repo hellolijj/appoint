@@ -1,0 +1,39 @@
+<scroll-view scroll-y="true" class="communityPublish-wrap" id="communityPublish">
+  <view class="communityPublish-main" style="{{require_loc ? 'padding-bottom: 0;' : ''}}">
+    <view class="communityPublish-title">
+      <input class="communityPublish-title-input {{showClassifyBox ? 'hide' : ''}}" id="communityPublish-title-input" placeholder="请输入标题" placeholder-style="color:#909090;font-size:14px;" type="text" bindblur="bindTitleInput" value="{{articleData.title}}" />
+    </view>
+    <view class="communityPublish-content">
+      <textarea class="communityPublish-content-input {{showClassifyBox ? 'hide' : ''}}" id="communityPublish-content-input" placeholder="请输入内容..." placeholder-style="color:#909090;font-size:12px;" bindinput="bindTextInput" maxlength="-1" value="{{articleData.text}}" />
+    </view>
+    <view class="communityPublish-img-wrap">
+      <view class="communityPublish-ul clearfix" id="communityPublish-ul">
+        <view wx:for="{{articleData.imgs}}" wx:key="" class="communityPublish-item">
+          <image src="{{item}}" mode="aspectFill"></image>
+          <view class="communityPublish-item-delete" data-index="{{index}}" catchtap="deleteImg">×</view>
+        </view>
+        <view class="communityPublish-item-add" catchtap="uploadImg"><span>+</span></view>
+      </view>
+    </view>
+    <view class="communityPublish-address" bindtap="getAddress" wx:if="{{require_loc}}">
+      <label class="ico-moon icon-community-location" style="color:{{address ? theme_color : ''}}"></label>
+      <input class="communityPublish-address-input {{showClassifyBox ? 'hide' : ''}}" id="communityPublish-address-input" placeholder="所在位置" placeholder-style="color:#000;font-size:14px;" type="text" disabled="true" bindinput="addressInput" value="{{address}}" />
+    </view>
+  </view>
+  <view class="communityPublish-center">
+    <view class="communityPublish-phone" wx:if="{{require_phone}}">
+      <label class="ico-moon icon-takeout-cellphone" style="color:{{articleData.phone ? theme_color : ''}}"></label>
+      <input class="communityPublish-phone-input" id="communityPublish-phone-input" placeholder="电话号码" placeholder-style="color:#000;font-size:14px;" type="number" bindinput="bindPhoneInput" value="{{articleData.phone}}" />
+    </view>
+    <view class="communityPublish-classify">
+      <label class="ico-moon icon-community-category" style="color:{{selectedClassify ? theme_color : ''}}"></label>
+      <picker bindchange="changeCategory" value="{{categoryIndex}}" range="{{category}}" range-key="name">
+        <view class="picker">{{selectedClassify ? category[categoryIndex].name : '选择分类'}}</view>
+      </picker>
+      <label class="ico-moon icon-rightarrow"></label>
+    </view>
+  </view>
+  <view class="communityPublish-foot">
+    <button class="communityPublish-btn" catchtap="submitData" style="background-color:{{theme_color}};">立即发布</button>
+  </view>
+</scroll-view>

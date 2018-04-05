@@ -1,0 +1,48 @@
+page {
+  background-color: #f6f6f6;
+}
+#couponGoodsList-wrap {
+  height: 100vh;
+}
+.couponGoodsList-ul {
+    background: #fff;
+}
+.couponGoods-li {
+  display: flex;
+  padding: 20rpx 30rpx;
+  border-bottom: 1rpx solid #f3f3f3;
+}
+.couponGoods-logo {
+  margin-right: 20rpx;
+  width: 150rpx;
+  height: 120rpx;
+  overflow: hidden;
+}
+.couponGoods-logo image {
+  width: 100%;
+  height: 100%;
+}
+.couponGoods-text {
+  flex: 1;
+  line-height: 40rpx;
+  font-size: 28rpx;
+  overflow: hidden;
+}
+.couponGoods-name {
+  height: 80rpx;
+  display: -webkit-box;
+  word-break: break-all;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.couponGoods-price {
+  color: #ff3b49;
+}
+.no-more {
+  text-align: center;
+  line-height: 80rpx;
+  background: #f6f6f6;
+  font-size: 28rpx;
+}

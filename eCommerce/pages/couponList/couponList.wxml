@@ -1,0 +1,106 @@
+<view id="coupon-list">
+  <view class="tabs">
+    <view class="tabs-wrap">
+      <view data-type="-1" bindtap="changeTab" class="{{ type == -1 ? 'active' : '' }}" >全部</view>
+      <view data-type="1" bindtap="changeTab" class="{{ type == 1 ? 'active' : '' }}" >未使用</view>
+      <view data-type="2" bindtap="changeTab" class="{{ type == 2 ? 'active' : '' }}" >已使用</view>
+      <view data-type="3" bindtap="changeTab" class="{{ type == 3 ? 'active' : '' }}" >已失效</view>
+    </view>
+  </view>
+  <scroll-view class="ticket-list"  scroll-y="true" lower-threshold="100"  bindscrolltolower="getMoreTabData">
+    <block wx:for="{{ couponList }}" wx:for-item="coupon" wx:key="">
+      <view class="ticket {{ (coupon.status == 2 || coupon.status == 3) ? 'expired':''}}" catchtap="gotoCouponDetail" data-id="{{ coupon.id }}">
+        <view class="top-section" wx:if="{{ coupon.type == 0 }}" style="{{ 'border-color:' + coupon.list_color }}">
+          <view class="detail-info">
+            <view class="name">{{ coupon.title }}</view>
+            <view class="use-condition">使用条件：满{{ coupon.condition }}元，减{{ coupon.value }}元</view>
+          </view>
+          <view class="background-word-area" style="{{ 'border-color:' + coupon.list_color }}">
+            <view class="background-circle" style="{{ 'background-color:' + coupon.list_color }}"></view>
+            <view class="background-word">减</view>
+          </view>
+          <view wx:if="{{ coupon.status == 1 }}" class="use-btn" catchtap="gotoTransferPage" style="{{ 'background-color:' + coupon.list_color }}">立即买单</view>
+          <view wx:elif="{{ coupon.status == 2 }}" class="use-btn" >已使用</view>
+          <view wx:elif="{{ coupon.status == 3 }}" class="use-btn" >已失效</view>
+        </view>
+        <view class="top-section" wx:elif="{{ coupon.type == 1 }}" style="{{ 'border-color:' + coupon.list_color }}">
+          <view class="detail-info">
+            <view class="name">{{ coupon.title }}</view>
+            <view class="use-condition">使用条件: 打{{ coupon.value }}折</view>
+          </view>
+          <view class="background-word-area" style="{{ 'border-color:' + coupon.list_color }}">
+            <view class="background-circle" style="{{ 'background-color:' + coupon.list_color }}"></view>
+            <view class="background-word">折</view>
+          </view>
+          <view wx:if="{{ coupon.status == 1 }}" class="use-btn" catchtap="gotoTransferPage" style="{{ 'background-color:' + coupon.list_color }}">立即买单</view>
+          <view wx:elif="{{ coupon.status == 2 }}" class="use-btn" >已使用</view>
+          <view wx:elif="{{ coupon.status == 3 }}" class="use-btn" >已失效</view>
+        </view>
+        <view class="top-section" wx:elif="{{ coupon.type == 2 }}" style="{{ 'border-color:' + coupon.list_color }}">
+          <view class="detail-info">
+            <view class="name">{{ coupon.title }}</view>
+            <view class="use-condition">使用条件：可抵扣{{ coupon.value }}元</view>
+          </view>
+          <view class="background-word-area" style="{{ 'border-color:' + coupon.list_color }}">
+            <view class="background-circle" style="{{ 'background-color:' + coupon.list_color }}"></view>
+            <view class="background-word">代</view>
+          </view>
+          <view wx:if="{{ coupon.status == 1 }}" class="use-btn" catchtap="gotoTransferPage" style="{{ 'background-color:' + coupon.list_color }}">立即买单</view>
+          <view wx:elif="{{ coupon.status == 2 }}" class="use-btn" >已使用</view>
+          <view wx:elif="{{ coupon.status == 3 }}" class="use-btn" >已失效</view>
+        </view>
+        <view class="top-section" wx:elif="{{ coupon.type == 3 }}" style="{{ 'border-color:' + coupon.list_color }}">
+          <view class="detail-info">
+            <view class="name">{{ coupon.title }}</view>
+            <view class="use-condition" wx:if="{{ coupon.extra_condition == '' }}" >使用条件: 直接兑换{{ coupon.coupon_goods_info.title }} </view>
+            <view class="use-condition" wx:elif="{{ coupon.extra_condition.price }}" >使用条件: 消费满{{ coupon.extra_condition.price }}元可兑换{{ coupon.coupon_goods_info.title }}</view>
+            <view class="use-condition" wx:elif="{{ coupon.extra_condition.goods_id }}" >使用条件: 购买{{ coupon.condition_goods_info.title }}可兑换{{ coupon.coupon_goods_info.title }}</view>
+          </view>
+          <view class="background-word-area" style="{{ 'border-color:' + coupon.list_color }}">
+            <view class="background-circle" style="{{ 'background-color:' + coupon.list_color }}"></view>
+            <view class="background-word">兑</view>
+          </view>
+          <view wx:if="{{ coupon.status == 2 }}" class="use-btn" >已使用</view>
+          <view wx:elif="{{ coupon.status == 3 }}" class="use-btn" >已失效</view>
+        </view>
+        <view class="top-section" wx:elif="{{ coupon.type == 4 }}" style="{{ 'border-color:' + coupon.list_color }}">
+          <view class="detail-info">
+            <view class="name">{{ coupon.title }}</view>
+            <view class="use-condition">使用条件: 储值金可充值{{ coupon.value }}元</view>
+          </view>
+          <view class="background-word-area" style="{{ 'border-color:' + coupon.list_color }}">
+            <view class="background-circle" style="{{ 'background-color:' + coupon.list_color }}"></view>
+            <view class="background-word">储</view>
+          </view>
+          <view wx:if="{{ coupon.status == 1 }}" class="use-btn" catchtap="gotoRecharge" data-id="{{ coupon.id }}" style="{{ 'background-color:' + coupon.list_color }}">立即充值</view>
+          <view wx:elif="{{ coupon.status == 2 }}" class="use-btn" >已使用</view>
+          <view wx:elif="{{ coupon.status == 3 }}" class="use-btn" >已失效</view>
+        </view>
+        <view class="top-section" wx:elif="{{ coupon.type == 5 }}" style="{{ 'border-color:' + coupon.list_color }}">
+          <view class="detail-info">
+            <view class="name">{{ coupon.title }}</view>
+            <view class="use-condition">使用条件: {{ coupon.extra_condition }}</view>
+          </view>
+          <view class="background-word-area" style="{{ 'border-color:' + coupon.list_color }}">
+            <view class="background-circle" style="{{ 'background-color:' + coupon.list_color }}"></view>
+            <view class="background-word">通</view>
+          </view>
+          <view wx:if="{{ coupon.status == 1 }}" class="use-btn" catchtap="gotoCouponDetail" data-id="{{ coupon.id }}" style="{{ 'background-color:' + coupon.list_color }}">立即使用</view>
+          <view wx:elif="{{ coupon.status == 2 }}" class="use-btn" >已使用</view>
+          <view wx:elif="{{ coupon.status == 3 }}" class="use-btn" >已失效</view>
+        </view>
+        <view class="bottom-section">
+          <view>有效期 {{ coupon.start_use_date }}至{{ coupon.end_use_date }} {{ coupon.exclude_holiday == 0 ? '':'除去法定节假日'}} {{coupon.exclude_weekend == 0 ? '':'周一至周五'}} {{ coupon.start_use_time }}-{{ coupon.end_use_time }}</view>
+        </view>
+      </view>
+    </block>
+    
+  </scroll-view>
+  <view class="zc-toast-bg {{ rechargeSuccess == 1 ? 'show' : '' }}" lower-threshold="100" catchtap="hideToast">
+    <view class="zc-toast">
+      <icon class="icon" type="success" size="20"></icon>
+      <view class="title">充值成功!</view>
+      <view class="content">请到储值金中查看</view>
+    </view>
+  </view>
+</view>

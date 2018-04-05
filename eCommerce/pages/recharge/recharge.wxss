@@ -1,0 +1,216 @@
+page {
+  height: 100%;
+}
+#recharge {
+  height: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+#recharge .select-area {
+  margin: 0 15px 15px;
+}
+#recharge .select-area .area-title {
+  text-align: left;
+  font-size: 15px;
+  color: #333;
+}
+#recharge .select-list {
+  display: flex;
+  flex-flow: row wrap;
+  margin-top: 15px;
+}
+#recharge .select-item {
+  display: inline-flex;
+  flex: 0 1 auto;
+  width: calc(50% - 5px);
+  height: 50px;
+  margin-bottom: 10px;
+  color: #ccc;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  box-sizing: border-box;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center
+}
+#recharge .select-item:nth-child(even){
+  margin-left: 10px;
+}
+#recharge .select-item.active {
+  border: 1px solid #ff7100;
+  color: #ff7100;
+}
+#recharge .select-item .recharge-money {
+  font-size: 14px;
+}
+#recharge .select-item .give-money {
+  margin-top: 3px;
+  font-size: 12px;
+}
+#recharge .instruction-area {
+  margin: 0 15px 30px;
+  border-top: 1px solid #eee;
+  padding-top: 15px;
+}
+#recharge .instruction-area .area-title {
+  text-align: left;
+  font-size: 15px;
+  color: #333;
+}
+#recharge .instruction-area .area-content {
+  margin: 8px 0;
+  color: #78809F;
+  font-size: 12px;
+  word-wrap: break-word;
+}
+#recharge .recharge-btn {
+  margin: 0 15px; 
+  height: 30px;
+  line-height: 30px;
+  border: 1px solid #ff7100;
+  background: #ff7100;
+  border-radius: 2px;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 0 2px 2px #eee;
+}
+#recharge .custom-item {
+  margin-top: 5px;
+  border: 1px solid #cccccc;
+  border-radius: 2px;
+  color: #cccccc;
+}
+#recharge .custom-item .item-title {
+  color:#ccc;
+  margin-top: 15px;
+  margin-left: 10px;
+  font-size: 14px;
+}
+#recharge .custom-item .item-price-block {
+  position: relative;
+  border-bottom: 1px solid #cccccc;
+  margin: 10px;
+  padding-bottom: 5px;
+  height: 36px;
+  line-height: 36px;
+  font-size: 16px;
+}
+#recharge .custom-item .item-price-symbol {
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #000;
+}
+#recharge .custom-item .item-price-input {
+  position: absolute;
+  top: 0;
+  left: 20px;
+  height: 36px;
+  line-height: 36px;
+  font-size: 18px;
+  vertical-align: top;
+}
+#recharge .custom-item .item-tip {
+  margin:0 10px 10px;
+  font-size:12px;
+}
+#recharge .custom-item.active {
+  border: 1px solid #ff7100;
+  color: #ff7100;
+}
+#recharge .custom-item.active .item-title {
+  color: #ff7100;
+}
+#recharge .custom-item.active .item-price-symbol {
+  color: #ff7100;
+}
+#recharge .custom-item.active .item-price-block{
+  border-bottom: 1px solid #ff7100;
+}
+#recharge .coupon-area {
+  margin: 0 15px 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+#recharge .coupon-area .area-title {
+  text-align: left;
+  font-size: 15px;
+  color: #333;
+}
+#recharge .coupon-list {
+  display: flex;
+  flex-flow: row wrap;
+  margin-top: 15px;
+}
+#recharge .coupon-item {
+  width: calc(50% - 5px);
+  margin-bottom: 10px;
+  color: #ccc;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  box-sizing: border-box;
+}
+#recharge .coupon-item:nth-child(even){
+  margin-left: 10px;
+}
+#recharge .coupon-item .item-title {
+  width: 100%;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 16px;
+}
+#recharge .coupon-item .price {
+  font-size: 24px;
+}
+#recharge .coupon-item .division-line {
+  position:relative;
+  left: -1px;
+  width: calc(100% + 2px);
+  height:10px;
+  overflow:hidden;
+  z-index:1;
+}
+#recharge .coupon-item .left-semicircle {
+  position:absolute;
+  top: 0;
+  left: -5px;
+  width: 10px;
+  height: 10px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  background: #fff;
+  box-sizing: border-box;
+}
+#recharge .coupon-item .right-semicircle {
+  position: absolute;
+  top: 0;
+  right: -5px;
+  width: 10px;
+  height: 10px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  box-sizing: border-box;
+  background: #fff;
+}
+#recharge .coupon-item .bottom-section {
+  position: relative;
+  top: -5px;
+  width:100%;
+  padding-top: 5px;
+  border-top:1px dashed #ccc;
+  font-size:12px;
+  line-height: 12px;
+  text-align:center;
+  box-sizing:border-box;
+}
+#recharge .coupon-item.active {
+  color: #ff7100;
+  border: 1px solid #ff7100;
+}
+#recharge .coupon-item.active .left-semicircle,
+#recharge .coupon-item.active .right-semicircle {
+  border: 1px solid #ff7100;
+}
+#recharge .coupon-item.active .bottom-section {
+  border-top:1px dashed #ff7100;
+}

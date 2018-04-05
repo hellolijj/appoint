@@ -1,0 +1,54 @@
+<view class="balance-wrap page" id="balance">
+  <scroll-view class="balance-content" scroll-y="true" lower-threshold="116" bindscrolltolower="checkMoreMessageData">
+    <view class="balance-detail">
+      <view class="detail-text">
+        <text>当前储值金（元）</text>
+      </view>
+      <view class="detail-num">
+        <text>{{ currentBalance }}</text>
+      </view>
+      <view class="detail-recharge" catchtap="gotoRecharge">
+        <text>充值</text>
+      </view>
+    </view>
+    <view class="message-content" >
+      <block wx:for="{{ messageData.data }}" wx:key="">
+        <view class="message-item" wx:if="{{ item.type == 1 }}">
+          <view class="message-title">自主充值</view>
+          <view class="message-num add">+{{ item.num }}</view>
+          <view class="message-time">{{ item.time }}</view>
+        </view>
+        <view class="message-item" wx:elif="{{ item.type == 2 }}">
+          <view class="message-title">商家充值</view>
+          <view class="message-num add">+{{ item.num }}</view>
+          <view class="message-time">{{ item.time }}</view>
+        </view>
+        <view class="message-item" wx:elif="{{ item.type == 3 }}">
+          <view class="message-title">商品买卖</view>
+          <view class="message-num minus">{{ item.num }}</view>
+          <view class="message-time">{{ item.time }}</view>
+        </view>
+        <view class="message-item" wx:elif="{{ item.type == 4 }}">
+          <view class="message-title">商品退款</view>
+          <view class="message-num add">+{{ item.num }}</view>
+          <view class="message-time">{{ item.time }}</view>
+        </view>
+        <view class="message-item" wx:elif="{{ item.type == 5 }}">
+          <view class="message-title">储值券充值</view>
+          <view class="message-num add">+{{ item.num }}</view>
+          <view class="message-time">{{ item.time }}</view>
+        </view>
+        <view class="message-item" wx:elif="{{ item.type == 6 }}">
+          <view class="message-title">自定义充值</view>
+          <view class="message-num add">+{{ item.num }}</view>
+          <view class="message-time">{{ item.time }}</view>
+        </view>
+        <view class="message-item" wx:elif="{{ item.type == 7 }}">
+          <view class="message-title">管理员手动撤回储值金</view>
+          <view class="message-num minus">{{ item.num }}</view>
+          <view class="message-time">{{ item.time }}</view>
+        </view>
+      </block>
+    </view>
+  </scroll-view>
+</view>

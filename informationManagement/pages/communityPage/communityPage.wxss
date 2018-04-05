@@ -1,0 +1,601 @@
+.communityPage-wrap{
+  font-size: 14px;
+}
+.community-li-top {
+  display: flex;
+}
+.community-li-cover{
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: 1px solid #eee;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+.community-li-cover > image{
+  width: 100%;
+  height: 100%;
+}
+.community-li-author{
+  flex: 1;
+  margin-left: 10px;
+  vertical-align: bottom;
+  overflow: hidden;
+}
+.community-li-name{
+  display: inline-block;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  max-width: 100px;
+  vertical-align: top;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.community-li-time{
+  display: block;
+  font-size: 12px;
+  color: #959595;
+}
+.community-hot,
+.community-stick {
+  display: inline-block;
+  width: 30px;
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+  line-height: 18px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.community-hot {
+  background: #FE644A;
+}
+.community-stick {
+  background: #3091f2;
+}
+.community-li-contact {
+  float: right;
+  width: 50px;
+  height: 18px;
+  text-align: center;
+  line-height: 18px;
+  font-size: 11px;
+  color: #3091f2;
+  border: 1px solid #3091f2;
+  border-radius: 4px;
+}
+
+.communityPage-wrap{
+  background-color: #eee;
+  height: 100vh;
+}
+.communityPage-head{
+  padding: 10px 15px;
+  background-color: #eee;
+}
+.communityPage-search{
+  display: inline-block;
+  width: 503.1rpx;
+  height: 30px;
+  border-radius: 4px;
+  vertical-align: top;
+  background: #fff;
+}
+.communityPage-head.fullSearch .communityPage-search {
+  width: 100%;
+}
+.communityPage-head.fullSearch .communityPage-search-input {
+  width: 550rpx;
+}
+.communityPage-search-input{
+  display: inline-block;
+  width: 409.5rpx;
+  height: 30px;
+  border: none;
+}
+.communityPage-search-btn{
+  display: inline-block;
+  width: 70.2rpx;
+  height: 30px;
+  color: #b2b2b2;
+  text-align: center;
+  vertical-align: top;
+}
+.communityPage-search-btn > icon{
+  font-size: 16px;
+  line-height: 30px;
+}
+.communityPage-topic-btn ,
+.communityPage-notify-btn{
+  display: inline-block;
+  width: 70rpx;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  font-size: 22px;
+  color: #00b6f8;
+  margin-left: 18rpx;
+  vertical-align: top;
+}
+.communityPage-carousel{
+  width: 100%;
+  height: 375rpx;
+  /*display: none;*/
+}
+.communityPage-carousel image{
+  width: 100%;
+  height: 100%;
+}
+.communityPage-info{
+  position: relative;
+  display: flex;
+  padding: 10px 0;
+  background-color: #fff;
+}
+.communityPage-info.nobanner::before {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .5);
+}
+.communityPage-img{
+  position: relative;
+  width: 80px;
+  height: 80px;
+  margin-left: 10px;
+  vertical-align: top;
+}
+.communityPage-info > view{
+  position: relative;
+  flex: 1;
+  margin-left: 10px;
+  vertical-align: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.communityPage-title{
+  display: block;
+  font-size: 16px;
+  color: #0e0e0e;
+  margin-bottom: 5px;
+}
+.communityPage-num{
+  height: 16px;
+  font-size: 12px;
+}
+.communityPage-num > text{
+  color: #a3a3a3;
+  margin-right: 20px;
+  white-space: nowrap;
+}
+.communityPage-num .communityPage-topic-num,
+.communityPage-num .communityPage-comment-num{
+  margin-left: 5px;
+}
+.communityPage-description {
+  margin-top: 5px;
+  padding-right: 10px;
+  font-size: 12px;
+  display: -webkit-box;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+.nobanner .communityPage-title,
+.nobanner .communityPage-num,
+.nobanner .communityPage-num > text,
+.nobanner .communityPage-description {
+  color: #fff;
+}
+
+.communityPage-topic{
+  position: relative;
+  margin-top: 10px;
+  white-space: nowrap;
+  overflow-x: auto;
+  background-color: #fff;
+}
+.communityPage-topic:after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20px;
+  height: 100%;
+  background: red;
+}
+.communityPage-topic .navli{
+  display: inline-block;
+  padding: 0 15px;
+  color: #a3a3a3;
+  text-align: center;
+  line-height: 40px;
+  overflow: hidden;
+}
+.communityPage-topic .navli.active{
+  color: #00b6f8;
+}
+.communityPage-list{
+  overflow: hidden;
+}
+.communityPage-li{
+  margin-top: 10px;
+  background-color: #fff;
+  padding: 15px;
+  padding-bottom: 0;
+}
+.communityPage-li-title{
+  display: block;
+  margin-top: 10px;
+  font-size: 16px;
+  color: #313131;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.communityPage-li-content{
+  display: block;
+  font-size: 12px;
+  color: #909090;
+  margin-top: 10px;
+  overflow : hidden;
+}
+.text-p{
+  display: block;
+}
+.communityPage-li-info{
+  color: #a3a3a3;
+}
+.communityPage-li-imgli-wrap{
+  margin-top: 10px;
+}
+.communityPage-li-imgli{
+  display: inline-block;
+  width: 210.6rpx;
+  height: 210.6rpx;
+  margin: 7.02rpx;
+  overflow: hidden;
+  vertical-align: top;
+}
+.communityPage-li-imgli-one{
+  margin: 7.02rpx;
+}
+.communityPage-li-imgli > image{
+  width: 100%;
+  height: 100%;
+}
+.communityPage-li-info > icon{
+  font-size: 18px;
+  margin-right: 3px;
+  vertical-align: middle;
+}
+.communityPage-li-info > icon:before{
+  display: block;
+}
+.communityPage-li-info > .icon-community-share {
+  font-size: 18px;
+}
+.communityPage-li-info > text{
+  position: relative;
+  top: 1px;
+}
+.communityPage-li-foot{
+  margin-top: 10px;
+}
+.communityPage-li-none{
+  text-align: center;
+  margin-top: 20px;
+}
+.communityPage-li-none image{
+  display: block;
+  margin: 20px auto;
+  width: 170px;
+  height: 88px;
+}
+.communityPage-li-nomore{
+  padding: 15px 0;
+  text-align: center;
+  font-size: 12px;
+  color: #949494;
+}
+.ellipsis-a{
+  color: #577a9f;
+  margin-left: 8px;
+}
+.communityPage-publish-btn,
+.communityPage-backtop-btn,
+.communityPage-service-btn {
+  position: relative;
+  margin-top: 20rpx;
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background-color: #00b6f8;
+  color: #fff;
+  text-align: center;
+  font-size: 34rpx;
+  line-height: 80rpx;
+}
+.communityPage-btns-group {
+  position:fixed;
+  bottom:40rpx;
+  right:30rpx;
+}
+.communityPage-service-btn {
+  font-size: 46rpx;
+}
+.communityPage-service-btn contact-button {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+.communityPage-li.friendType-li {
+ padding-bottom: 15px;
+}
+.friendType-li .community-li-cover {
+  border-radius: 5px;
+  vertical-align: top;
+}
+.friendType-li .communityPage-li-title {
+  margin-top: 0;
+  font-size: 14px;
+}
+.friendType-li .communityPage-li-imgli-wrap {
+  margin-left: 50px;
+}
+.friendType-li .communityPage-li-imgli {
+  margin: 4rpx;
+  width: 185rpx;
+  height: 185rpx;
+}
+.friendType-li .communityPage-li-content {
+  margin-left: 50px;
+}
+.friendType-li .communityPage-li-center {
+  margin: 10px 0;
+  margin-left: 50px;
+  font-size: 12px;
+}
+.friendType-li .communityPage-li-center.flex {
+  display: flex;
+}
+.friendType-li .communityPage-li-center > text,
+.friendType-li .communityPage-li-center > view {
+  display: inline-block;
+  vertical-align: middle;
+}
+.friendType-li .community-li-comment label {
+  position: relative;
+  top: -2px;
+}
+.friendType-li .communityPage-li-center .community-li-time {
+  padding-right: 10px;
+  max-width: 70px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.friendType-li .communityPage-li-center .community-li-address {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #9c9c9c;
+}
+.friendType-li .community-li-address label {
+  position: relative;
+  top: 1px;
+}
+.friendType-li .community-li-comment {
+  position: relative;
+  float: right;
+  font-size: 16px;
+  color: #999;
+}
+.friendType-li .community-li-comment:after {
+  position: absolute;
+  left: -15px;
+  top: -15px;
+  content: '';
+  width: 40px;
+  height: 40px;
+}
+.friendType-li .comment-box {
+  position: absolute;
+  left: -10px;
+  top: -14px;
+  display: none;
+  padding: 10px 0;
+  height: 20px;
+  border-radius: 5px;
+  background: rgba(76,81,84,1);
+  color: #fff;
+  transform: translateX(-100%);
+}
+.friendType-li .comment-box.show {
+  display: table-row;
+}
+.friendType-li .comment-box > view {
+  position: relative;
+  display: table-cell;
+  padding: 0 20px;
+  line-height: 20px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+.friendType-li .comment-box label {
+  display: inline;
+  margin-right: 5px;
+}
+.friendType-li .comment-box view:first-child {
+  border-right: 2px solid #999;
+}
+.friendType-li .comment-box .ico-moon {
+  font-size: 18px;
+  vertical-align: middle;
+}
+.friendType-li .communityPage-li-likes {
+  margin-left: 50px;
+  padding: 10px;
+  height: 20px;
+  line-height: 20px;
+  background: #f5f5f5;
+}
+.friendType-li .communityPage-li-likes.border {
+  border-bottom:1px solid #e1e1e1;
+}
+.communityPage-li-likes label {
+  padding-right: 10px;
+  font-size: 18px;
+  color: #999;
+  vertical-align: middle;
+}
+.communityPage-li-likes label.icon-heart-empty {
+  font-size: 14px;
+}
+.communityPage-li-likes .like-images {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 150px;
+  height: 20px;
+  overflow: hidden;
+}
+.communityPage-li-likes image {
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 2px;
+}
+.communityPage-li-likes text {
+  display: inline-block;
+  padding-left: 10px;
+  height: 20px;
+  font-size: 12px;
+  color: #adadad;
+}
+.commuinty-li-replyList {
+  margin-left: 50px;
+  padding: 10px;
+  background: #f5f5f5;
+  color: #6a6a6a;
+}
+.commuinty-li-replyList view {
+  line-height: 22px;
+  font-size: 12px;
+}
+.commuinty-li-replyList > view:last-child {
+  color: #3091f2;
+}
+.commuinty-li-replyList .replyto {
+  display: inline-block;
+}
+.commuinty-li-replyList view text {
+  margin: 0 5px;
+  color: #999;
+}
+.communityPage-li-location {
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: #9c9c9c;
+}
+.communityPage-li-location label {
+  margin-right: 5px;
+}
+.comunityPage-shareBox-wrap {
+  height: 40px;
+}
+.comunityPage-li-shareBox {
+  position: absolute;
+  left: 0;
+  display: flex;
+  padding: 10px 0;
+  width: 100%;
+  height: 20px;
+  background: #fff;
+  border-top: 1px solid #f4f4f4;
+}
+.comunityPage-li-shareBox .communityPage-li-info {
+  position: relative;
+  flex: 1;
+  text-align: center;
+  line-height: 20px;
+  font-size: 12px;
+  border: none;
+  border-right: 1px solid #f4f4f4;
+  border-radius: 0;
+  background: #fff;
+}
+.comunityPage-li-shareBox .communityPage-li-info:last-child {
+  border-right: none;
+}
+
+.actionSheet-wrap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .4);
+}
+.actionSheet-wrap .actionSheet-buttons {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, .8);
+}
+.actionSheet-wrap button {
+  height: 46px;
+  line-height: 46px;
+  font-size: 14px;
+  border-bottom: 1px solid #e5e6ee; 
+  border-radius: 0;
+}
+.actionSheet-wrap button.phoneNum-btn {
+  color: #999;
+}
+.actionSheet-wrap button.cancel-btn {
+  margin-top: 5px;
+}
+
+.communityPage-reply-wrap {
+ position: absolute;
+ top: 0;
+ left: 0;
+ width: 100%;
+ height: 100%;
+ background: rgba(0, 0, 0, .3);
+}
+.communityPage-reply-box {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+}
+.communityPage-reply-box textarea {
+  box-sizing: border-box;
+  padding: 0 15px 15px;
+  width: 100%;
+  height: 120px;
+  font-size: 14px;
+}
+.communityPage-reply-box .reply-box-top {
+  padding: 0 15px;
+  line-height: 40px;
+}
+.communityPage-reply-box .publish-reply {
+  float: right;
+  color: #3091f2;
+}
+

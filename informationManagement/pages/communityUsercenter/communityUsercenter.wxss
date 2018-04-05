@@ -1,0 +1,345 @@
+.community-li-cover{
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: 1px solid #eee;
+  overflow: hidden;
+  vertical-align: bottom;
+}
+.community-li-cover > image{
+  width: 100%;
+  height: 100%;
+}
+.community-li-author{
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: bottom;
+}
+.community-li-name{
+  display: inline-block;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  max-width: 100px;
+  vertical-align: top;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.community-hot,
+.community-stick {
+  display: inline-block;
+  width: 30px;
+  font-size: 12px;
+  color: #fff;
+  text-align: center;
+  line-height: 18px;
+  margin-right: 5px;
+  vertical-align: middle;
+}
+.community-hot {
+  background: #FE644A;
+}
+.community-stick {
+  background: #3091f2;
+}
+.community-li-time{
+  font-size: 12px;
+  color: #959595;
+}
+
+
+
+.communityUsercenter-wrap{
+  font-size: 14px;
+}
+.communityUsercenter-wrap{
+  background-color: #eee;
+  height: 100vh;
+  position:relative;
+}
+.communityUsercenter-head{
+  height: 45px;
+  color: #3a3a3a;
+  background-color: #f8f8f8;
+}
+.communityUsercenter-back{
+  float: left;
+  line-height: 45px;
+  margin-left: 10px;
+  width: 30px;
+  text-align: center;
+  font-size: 16px;
+}
+.communityUsercenter-tab{
+  text-align: center;
+}
+.communityUsercenter-tab > view{
+  display: inline-block;
+  width: 100px;
+  line-height: 44px;
+  margin: 0 10px;
+  vertical-align: top;
+}
+.communityUsercenter-tab > view.active{
+  color: #00b6f8;
+  border-bottom: 1px solid #00b6f8;
+}
+.communityUsercenter-content{
+  position: absolute;
+  top: 45px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: auto;
+}
+.communityUsercenter-scrollwrap{
+  position:absolute;
+  top: 0;
+  bottom:0;
+  left: 0;
+  right: 0;
+  display: none;
+}
+.communityUsercenter-scrollwrap.active{
+  display: block;
+}
+.communityUsercenter-li{
+  margin-top: 10px;
+  background-color: #fff;
+  padding: 15px;
+}
+.communityUsercenter-myli-title{
+  display: block;
+  margin-top: 10px;
+  color: #313131;
+  font-size: 16px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.communityUsercenter-myli-content{
+  display: block;
+  font-size: 12px;
+  color: #909090;
+  margin-top: 5px;
+  overflow : hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.communityUsercenter-imgli-wrap{
+  margin-top: 10px;
+}
+.communityUsercenter-imgli{
+    display: inline-block;
+    width: 210.6rpx;
+    height: 210.6rpx;
+    margin: 7.02rpx;
+    overflow: hidden;
+    vertical-align: top;
+}
+.communityUsercenter-imgli > image{
+  width: 100%;
+  height: 100%;
+}
+.communityUsercenter-myli-audit{
+  float: right;
+  height: 20px;
+  font-size: 12px;
+  text-align: center;
+  line-height: 20px;
+  color: #FFA200;
+}
+.communityUsercenter-myli-audit.audit-success {
+  color: #3091F2;
+}
+.communityUsercenter-myli-audit.audit-fail {
+  color: #FF3E3E;
+}
+.communityUsercenter-myli-audit.audit-stop {
+  color: #000;
+}
+.communityUsercenter-myli-audit.audit-stop label {
+  margin-right: 2px;
+  color: #f00;
+}
+.communityUsercenter-myli-info{
+  float: right;
+  color: #a3a3a3;
+  margin-left: 10px;
+  position: relative;
+}
+.communityUsercenter-myli-info > icon{
+  font-size: 16px;
+  margin-right: 3px;
+  vertical-align: middle;
+}
+.communityUsercenter-myli-info > icon.icon-community_message {
+  font-size: 18px;
+}
+.communityUsercenter-myli-info > icon:before{
+  display: block;
+}
+.communityUsercenter-myli-info > text{
+  vertical-align: middle;
+}
+.communityUsercenter-myli-foot{
+  margin-top: 10px;
+  height: 20px;
+}
+.communityUsercenter-myli-more{
+  position: absolute;
+  top : -40px;
+  right: 0;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+  font-size: 12px;
+  white-space: nowrap;
+  display: none;
+}
+.communityUsercenter-myli-more.show{
+  display: block;
+}
+.communityUsercenter-myli-more:after{
+  content: '';
+  display: block;
+  position: absolute;
+  bottom: -7px;
+  right: 5px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 8px solid #333;
+}
+.communityUsercenter-myli-more > view{
+  display: inline-block;
+  width: 50px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+  vertical-align: top;
+}
+.communityUsercenter-myli-more .communityUsercenter-line{
+  display: inline-block;
+  width: 1px;
+  height: 20px;
+  margin-top: 5px;
+  background-color: #474747;
+}
+.communityUsercenter-more-icon{
+  display: inline-block;
+  width: 100%;
+}
+.communityUsercenter-reply-li-content{
+  margin: 10px 0;
+}
+.text-p{
+  display: block;
+}
+.communityUsercenter-reply-li-post{
+  padding: 8px;
+  background-color: #f4f4f4;
+}
+.communityUsercenter-reply-li-post > image{
+  width: 40px;
+  height: 40px;
+  vertical-align: top;
+  margin-right: 15px;
+}
+.communityUsercenter-reply-li-post > text{
+  display: inline-block;
+  font-size: 12px;
+  color: #959595;
+  vertical-align: top;
+}
+.communityUsercenter-li-none{
+  padding: 15px 0;
+  text-align: center;
+  font-size: 12px;
+  color: #949494;
+}
+.communityUsercenter-replyto{
+  color: #577a9f;
+  margin-right: 5px;
+}
+
+.communityUsercenter-appeal-mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .3);
+}
+.communityUsercenter-appeal-window {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 300px;
+  text-align: center;
+  background: #fff;
+  transform: translateX(-50%) translateY(-50%);
+  border-radius: 5px;
+}
+.communityUsercenter-appeal-window .appeal-top {
+  height: 48px;
+  text-align: center;
+  line-height: 48px;
+  color: #000;
+  font-size: 18px;
+  border-bottom: 1px solid #D6D5DA;
+}
+.communityUsercenter-appeal-window .close-appealWindow {
+  position: absolute;
+  right: 0;
+  padding: 0 25px;
+  line-height: 48px;
+  font-size: 24px;
+  color: #d5d6da;
+}
+.communityUsercenter-appeal-window textarea {
+  margin: 15px auto;
+  padding: 10px;
+  width: 223px;
+  height: 70px;
+  font-size: 14px;
+  border: 1px solid #eee;
+  text-align: left;
+}
+.communityUsercenter-appeal-window .submit-btn {
+  margin: 0 auto;
+  margin-bottom: 15px;
+  width: 245px;
+  height: 40px;
+  line-height: 40px;
+  background: #3091f2;
+  color: #fff;
+  border-radius: 5px;
+}
+.actionSheet-wrap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, .4);
+}
+.actionSheet-wrap .actionSheet-buttons {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, .8);
+}
+.actionSheet-wrap button {
+  height: 46px;
+  line-height: 46px;
+  font-size: 14px;
+  border-bottom: 1px solid #e5e6ee; 
+  border-radius: 0;
+}
+.actionSheet-wrap button.cancel-btn {
+  margin-top: 5px;
+}

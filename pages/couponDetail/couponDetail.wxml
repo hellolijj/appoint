@@ -1,0 +1,102 @@
+<view class="page" id="couponDetail" style="background: {{ couponDetail.background }}">
+  <view class="coupon-detail-wrap {{ detailShow ? 'show' : ''  }}">
+    <view class="top-section">
+      <image class="logo" src="{{ couponDetail.logo }}"></image>
+      <view class="name">{{ couponDetail.app_name }}</view>
+      <view class="ico-moon icon-share-new share" hidden="{{ (status == 'use' && (couponDetail.in_show_list == 0)) || (status == 'receive' && (couponDetail.enable_status  == 0 || couponDetail.stock == 0  || couponDetail.in_show_list == 0))  }}">
+        <button class="share-btn" open-type="share" ></button>
+      </view>
+      <view class="division-line">
+        <view class="left-circle" style="background: {{ couponDetail.background }}"></view>
+        <view class="right-circle" style="background: {{ couponDetail.background }}"></view>
+      </view>
+    </view>
+    <view class="middle-section">
+      <view class="title">{{ couponDetail.title }}</view>
+      <view class="sub-title">{{ couponDetail.sub_title }}</view>
+      <view wx:if="{{ status == 'use' && couponDetail.type != 4 }}"  class="ico-moon icon-qrcode-new qrcode" bindtap="showCouponVerify"></view>
+      <form bindsubmit="formSubmit" report-submit="{{true}}" data-coupon-id="{{ coupon.id }}">
+      <view wx:if="{{ status == 'receive' && (couponDetail.enable_status == 0 || couponDetail.in_show_list == 0) }}" class="function-btn disabled">已下架</view>
+      <view wx:elif="{{ status == 'receive' && couponDetail.stock == 0 }}" class="function-btn disabled" >已领完</view>
+      <view wx:elif="{{ status == 'receive' && couponDetail.is_already_recv == 1 }}" class="function-btn disabled">已领取</view>
+      <button wx:elif="{{ status == 'receive' && couponDetail.is_already_recv == 0 }}" class="function-btn" formType="submit" style="{{ 'background-color:' + couponDetail.button_color }}">立即领取</button>
+      <view wx:elif="{{ status == 'use' && couponDetail.status == 2 }}" class="function-btn disabled" >已使用</view>
+      <view wx:elif="{{ status == 'use' && couponDetail.status == 3 }}" class="function-btn disabled" >已失效</view>
+      <view wx:elif="{{ status == 'use' && couponDetail.status == 4 }}" class="function-btn disabled" >未生效</view>
+      <view wx:elif="{{ status == 'use' && (couponDetail.type == 0 || couponDetail.type == 1 || couponDetail.type == 2) }}" class="function-btn" catchtap="gotoTransferPage" style="{{ 'background-color:' + couponDetail.button_color }}">快速买单</view>
+      <view wx:elif="{{ status == 'use' && couponDetail.type == 3 }}"></view>
+      <view wx:elif="{{ status == 'use' && couponDetail.type == 4 }}" class="function-btn" catchtap="gotoRecharge" data-id="{{ couponDetail.id}}" style="{{ 'background-color:' + couponDetail.button_color }}">立即充值</view>
+      <view wx:elif="{{ status == 'use' && couponDetail.type == 5 }}" ></view></form>
+
+      <view class="detail-item condition">
+        <view class="item-name">使用条件：</view>
+        <view class="item-content">{{ couponDetail.useCondition }}</view>
+      </view>
+      <view class="detail-item time">
+        <view class="item-name">可用时间：</view>
+        <view class="item-content">
+          <view class="date-duration">{{couponDetail.expire == '-1' ?  (couponDetail.start_use_date + '至' + couponDetail.end_use_date) : couponDetail.expire == '0' ? '领取当天生效,有效期1天' : ('领取'+ (couponDetail.react > 0 ? couponDetail.react + '天后' : '当天') + '生效，有效期'+ couponDetail.expire +'天')}}</view>
+          <view class="other-case">{{ couponDetail.exclude_holiday == 1 ? '除法定节假日' : '' }} {{ couponDetail.exclude_weekend == 1 ? '周一至周五' : '' }}</view>
+          <view class="time-duration">{{ couponDetail.start_use_time + '-' + couponDetail.end_use_time }}</view>
+        </view>
+      </view>
+    </view>
+    <view class="bottom-section">
+      <view class="detail-item couponGoods" wx:if="{{couponDetail.extra_goods&&couponDetail.extra_goods!='null'}}" catchtap="turnToCouponGoodsList">
+        <view class="item-name">部分可用商品</view>
+        <view class="item-right"><text>查看</text><label class="ico-moon icon-rightarrow"></label></view>
+      </view>
+      <view class="detail-item address" wx:if="{{ couponDetail.address != '' }}">
+        <view class="item-name">店铺地址：</view>
+        <view class="item-content">{{ couponDetail.address }}</view>
+      </view>
+      <view class="detail-item phone" wx:if="{{ couponDetail.phone != '' }}">
+        <view class="item-name">联系电话：</view>
+        <view class="item-content">{{ couponDetail.phone }}</view>
+      </view>
+      <view class="goto-homepage" bindtap="goToHomepage">
+        <view class="goto-homepage-text">返回首页</view>
+        <view class="ico-moon icon-rightarrow"></view>
+      </view>
+    </view>
+  </view>
+  <view class="zc-toast-bg {{ receiveSuccess == 1 ? 'show' : '' }}" catchtap="hideReceiveToast">
+    <view class="zc-toast receive-success">
+      <icon class="icon" type="success" size="20"></icon>
+      <view class="title">领取成功!</view>
+      <view class="content">已领{{ receiveCount }}张，限领{{ receiveLimitNum }}张</view>
+    </view>
+  </view>
+  <view class="zc-toast-bg {{ rechargeSuccess == 1 ? 'show' : '' }}" catchtap="hideToast">
+    <view class="zc-toast recharge-success">
+      <icon class="icon" type="success" size="20"></icon>
+      <view class="title">充值成功!</view>
+      <view class="content">请到储值金中查看</view>
+    </view>
+  </view>
+  <view class="coupon-verify-wrap {{ verifyShow ? 'show' : ''  }}">
+    <view class="top-section">
+      <view class="cancel" bindtap="hideCouponVerify" hidden="{{ verifyData.success }}" >取消</view>
+      <view class="name">{{ couponDetail.app_name }}</view>
+      <view class="title">{{ couponDetail.title }}</view>
+    </view>
+    <view class="division-line">
+      <view class="left-circle" style="background: {{ couponDetail.background }}"></view>
+      <view class="right-circle" style="background: {{ couponDetail.background }}"></view>
+    </view>
+    <view class="bottom-section">
+      <view class="verify-block" wx:if="{{ !verifyData.success }}">
+        <image class="qrcode" src="{{ verifyData.qrcodeUrl }}"></image>
+        <view class="code">核销码：{{ couponDetail.verify_code }}</view>
+        <view class="tip">提示：请提示商家扫码核销</view>
+      </view>
+      <view class="success-block" wx:elif="{{ verifyData.success }}">
+        <view class="success-tip">
+          <icon class="success-tip-icon" type="success" size="20"></icon>
+          <text class="success-tip-text">核销成功!</text>
+        </view>
+        <view class="back-tip" bindtap="hideCouponVerify">>>>返回</view>
+      </view>
+    </view>
+  </view>
+</view>

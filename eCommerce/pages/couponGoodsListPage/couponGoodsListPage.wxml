@@ -1,0 +1,14 @@
+<scroll-view id="couponGoodsList-wrap"  scroll-y="{{true}}" bindscrolltolower="getGoodsList" lower-threshold="50">
+  <view class="couponGoodsList-ul">
+    <view class="couponGoods-li" wx:for="{{goodsList}}" wx:for-item="goodsItem" wx:for-index="goodsIdx" wx:key="{{goodsItem}}" data-id="{{goodsItem.id}}"data-goods-type="{{goodsItem.goods_type}}" data-group="{{goodsItem.is_group_buy}}" data-sub-app-id="{{goodsItem.app_id}}" catchtap="turnToGoodsDetail" data-is-seckill="{{goodsItem.is_seckill}}">
+      <view class="couponGoods-logo">
+        <image src="{{goodsItem.cover}}" mode="aspectFill" alt=""></image>
+      </view>
+      <view class="couponGoods-text">
+        <view class="couponGoods-name">{{goodsItem.title}}</view>
+        <view class="couponGoods-price">￥{{goodsItem.price}}</view>
+      </view>
+    </view>
+    <view class="no-more" wx:if="{{noMore}}">没有更多了</view>
+  </view>
+</scroll-view>

@@ -1,0 +1,30 @@
+<view class="goods-coupon-list page">
+  <view class="franchisee-goods-coupon-container">
+    <view class="coupon_ticket" wx:for="{{franchiseeInfo.coupon_list}}" wx:key="" data-id="{{item.id}}" bindtap="turnToCouponDetail">
+      <view class="ticket-wrap" wx:if="{{item.type==0}}">
+        <view class="price">￥<span>{{item.value}}</span></view>
+        <view class="coupon_right">
+          <view class="coupon_name">{{item.title}}</view>
+          <view>消费满{{item.condition}}元减{{item.value}}</view>
+          <view class="coupon-time">{{item.expire == '-1' ?  (item.start_use_date + '至' + item.end_use_date) : item.expire == '0' ? '领取当天生效,有效期1天' : ('领取'+ (item.react > 0 ? item.react + '天后' : '当天') + '生效，有效期'+ item.expire +'天')}} {{ item.exclude_holiday == 0 ? '':'除去法定节假日'}} {{item.exclude_weekend == 0 ? '':'周一至周五'}}</view>
+        </view>
+      </view>
+      <view class="ticket-wrap" wx:elif="{{item.type==1}}">
+        <view class="price"><span>{{item.value}}折</span></view>
+        <view class="coupon_right">
+          <view class="coupon_name">{{item.title}}</view>
+          <view>打{{item.value}}折优惠</view>
+          <view class="coupon-time">{{item.expire == '-1' ?  (item.start_use_date + '至' + item.end_use_date) : item.expire == '0' ? '领取当天生效,有效期1天' : ('领取'+ (item.react > 0 ? item.react + '天后' : '当天') + '生效，有效期'+ item.expire +'天')}} {{ item.exclude_holiday == 0 ? '':'除去法定节假日'}} {{item.exclude_weekend == 0 ? '':'周一至周五'}}</view>
+        </view>
+      </view>
+      <view class="ticket-wrap" wx:elif="{{item.type==2}}">
+        <view class="price">￥<span>{{item.value}}</span></view>
+        <view class="coupon_right">
+          <view class="coupon_name">{{item.title}}</view>
+          <view>可抵扣{{item.value}}元</view>
+          <view class="coupon-time">{{item.expire == '-1' ?  (item.start_use_date + '至' + item.end_use_date) : item.expire == '0' ? '领取当天生效,有效期1天' : ('领取'+ (item.react > 0 ? item.react + '天后' : '当天') + '生效，有效期'+ item.expire +'天')}} {{ item.exclude_holiday == 0 ? '':'除去法定节假日'}} {{item.exclude_weekend == 0 ? '':'周一至周五'}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

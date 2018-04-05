@@ -1,0 +1,61 @@
+.winningRecord{
+  height: 100%;
+  background:#eee;
+
+}
+.record-tab-list{
+  position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    line-height: 85rpx;
+    background: #fff;
+    text-align: center;
+}
+.record-tab-list view{
+    width: 33%;
+    float: left;
+    border-bottom: 1px solid transparent;
+}
+.record-tab-list view.active{
+   color: #ff7100;
+   border-color: #ff7100;
+}
+.record-content-body{
+  margin-top: 105rpx;
+}
+.record-wrap-list{
+  padding: 46rpx 23rpx 23rpx 35rpx;
+  background: #fff;
+  margin-bottom: 23rpx;
+}
+.record-name{
+  color: #333333;
+  font-size: 37rpx;
+}
+.record-start{
+  color: #666666;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 32rpx;
+}
+.record-start .record-apply{
+  float: left;
+}
+.record-start .record-staus{
+  float: right;
+}
+.record-end{
+  color: #666666;
+  height: 70rpx;
+  line-height: 70rpx;
+  font-size: 32rpx;
+}
+.record-none{
+  text-align: center;
+  height: 100rpx;
+  line-height: 100rpx;
+  color: #c2c2c2;
+  background: #fff;
+}

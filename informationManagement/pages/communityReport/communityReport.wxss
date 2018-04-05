@@ -1,0 +1,66 @@
+page {
+  height: 100%;
+}
+#communityReport {
+  background: #eee;
+  height: 100%;
+  overflow: auto;
+}
+.communityReport-title {
+  padding-left: 20px;
+  font-size: 14px;
+  line-height: 40px;
+  color: #918F90;
+}
+.comunityReport-reasonOptions {
+  margin-bottom: 10px;
+  padding-left: 20px;
+  background: #fff;
+}
+.comunityReport-reasonOptions .option-item {
+  padding-right: 20px;
+  height: 49px;
+  line-height: 49px;
+  font-size: 15px;
+  border-bottom: 1px solid #e5e5e5;
+  color: #252525;
+}
+.comunityReport-reasonOptions .option-item:last-child {
+  border-bottom: none;
+}
+.comunityReport-reasonOptions .option-item radio {
+  float: right;
+}
+.communityReport-otherReason {
+  padding: 20px;
+  padding-top: 10px;
+  background: #fff;
+}
+.communityReport-otherReason > view {
+  margin-bottom: 10px;
+  line-height: 16px;
+  font-size: 16px;
+  color: #252525;
+}
+.communityReport-otherReason textarea {
+  display: block;
+  padding: 10px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 116px;
+  background: #eee;
+  outline: none;
+}
+.communityReport-buttons .submit-btn {
+  margin: 10px 20px;
+  height: 44px;
+  line-height: 44px;
+  text-align: center;
+  border-radius: 5px;
+  background: #3091f2;
+  color: #fff;
+  opacity: .5;
+}
+.communityReport-buttons .submit-btn.cando {
+  opacity: 1;
+}
