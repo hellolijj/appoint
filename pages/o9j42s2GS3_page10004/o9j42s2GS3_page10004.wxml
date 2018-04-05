@@ -273,7 +273,4 @@
 
 <template is="zcSuspension" data="{{data:suspension3}}"></template>
 
-<view style="height:20px;width:100%;overflow:hidden;margin-top:10px;">
-  <image style="width:80%;height:35px;margin:-15px 10% 0 10%;" src="http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/tec-support.png"></image>
-</view>
 </view>
