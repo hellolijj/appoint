@@ -69,12 +69,10 @@ Page({
     })
   },
   saveUserInfo: function (e) {
+    console.log('submit获取数据为：' , e.detail.value)
     var data = this.data.userInfo;
-    // `data.formid` = e.detail.formId;
-    if (!data['phone'] || !data['passport']) {
-      return false
-    }
-      
+    data['passport'] = e.detail.passport;
+    data['phone'] = e.detail.telephone;
     data['formid'] = e.detail.formId;
     app.sendRequest({
       url: '/index.php?r=AppData/saveUserInfo',
