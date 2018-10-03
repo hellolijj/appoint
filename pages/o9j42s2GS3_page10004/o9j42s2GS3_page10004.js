@@ -1,7 +1,7 @@
 var app      = getApp();
 
 var pageData = {
-  data: {"user_center1":{"type":"user-center","style":"opacity:1;color:rgb(255, 255, 255);margin-top:0;font-size:37.5rpx;height:auto;margin-left:auto;","content":"","customFeature":{"mode":1,"with-horizontal":true,"topSectionStyle":{"background-color":"rgb(205, 205, 205)","background-image":""},"appendComponentAttr":{"myAddress":{"margin-top":"-1px","openVerifyPhone":false},"myOrder":{"margin-top":"-1px","openVerifyPhone":false},"shoppingCart":{"margin-top":"-1px","openVerifyPhone":false},"myMessage":{"margin-top":"-1px","openVerifyPhone":false},"vipCard":{"margin-top":"-1px","openVerifyPhone":false},"coupon":{"margin-top":"-1px","openVerifyPhone":false},"myIntegral":{"margin-top":"-1px","openVerifyPhone":false},"balance":{"margin-top":"-1px","openVerifyPhone":false},"myGroup":{"margin-top":"-1px","openVerifyPhone":false},"winningRecord":{"margin-top":"-1px","openVerifyPhone":false},"myVideo":{"margin-top":"-1px","openVerifyPhone":false},"myPromotion":{"margin-top":"-1px","openVerifyPhone":false}},"appendComponent":["myAddress","myOrder","shoppingCart","coupon"]},"animations":[],"page_form":"","compId":"user_center1","parentCompid":"user_center1"},"suspension2":{"type":"suspension","style":"opacity:1;color:#fff;font-size:46.875rpx;margin-left:auto;","content":[],"customFeature":{"margin":1,"lineBackgroundColor":"rgba(0,0,0,0.5)","appendComponent":{"service":false,"myOrder":false,"shoppingCart":false,"top":false}},"animations":[],"page_form":"","compId":"suspension2","list_style":"margin-bottom:2.34375rpx;border-radius:;background-color:rgba(0,0,0,0.5);margin-left:auto;","suspension_bottom":70},"suspension3":{"type":"suspension","style":"opacity:1;color:#fff;font-size:46.875rpx;margin-left:auto;","content":[],"customFeature":{"margin":1,"lineBackgroundColor":"rgba(0,0,0,0.5)","appendComponent":{"service":true,"myOrder":true,"shoppingCart":false,"top":false}},"animations":[],"page_form":"","compId":"suspension3","list_style":"margin-bottom:2.34375rpx;border-radius:;background-color:rgba(0,0,0,0.5);margin-left:auto;","suspension_bottom":70},"has_tabbar":1,"page_hidden":true,"page_form":"","top_nav":{"navigationBarTitleText":"\u9996\u9875"}},
+  data: {"user_center1":{"type":"user-center","style":"opacity:1;color:rgb(255, 255, 255);margin-top:0;font-size:37.5rpx;height:auto;margin-left:auto;","content":"","customFeature":{"mode":1,"with-horizontal":true,"topSectionStyle":{"background-color":"rgb(205, 205, 205)","background-image":""},"appendComponentAttr":{"myAddress":{"margin-top":"-1px","openVerifyPhone":false},"myOrder":{"margin-top":"-1px","openVerifyPhone":false},"shoppingCart":{"margin-top":"-1px","openVerifyPhone":false},"myMessage":{"margin-top":"-1px","openVerifyPhone":false},"vipCard":{"margin-top":"-1px","openVerifyPhone":false},"coupon":{"margin-top":"-1px","openVerifyPhone":false},"myIntegral":{"margin-top":"-1px","openVerifyPhone":false},"balance":{"margin-top":"-1px","openVerifyPhone":false},"myGroup":{"margin-top":"-1px","openVerifyPhone":false},"winningRecord":{"margin-top":"-1px","openVerifyPhone":false},"myVideo":{"margin-top":"-1px","openVerifyPhone":false},"myPromotion":{"margin-top":"-1px","openVerifyPhone":false}},"appendComponent":["myAddress","myOrder","shoppingCart","coupon"]},"animations":[],"page_form":"","compId":"user_center1","parentCompid":"user_center1"},"suspension2":{"type":"suspension","style":"opacity:1;color:#fff;font-size:46.875rpx;margin-left:auto;","content":[],"customFeature":{"margin":1,"lineBackgroundColor":"rgba(0,0,0,0.5)","appendComponent":{"service":false,"myOrder":false,"shoppingCart":false,"top":false}},"animations":[],"page_form":"","compId":"suspension2","list_style":"margin-bottom:2.34375rpx;border-radius:;background-color:rgba(0,0,0,0.5);margin-left:auto;","suspension_bottom":70},"suspension3":{"type":"suspension","style":"opacity:1;color:#fff;font-size:46.875rpx;margin-left:auto;","content":[],"customFeature":{"margin":1,"lineBackgroundColor":"rgba(0,0,0,0.5)","appendComponent":{"service":true,"myOrder":true,"shoppingCart":false,"top":false}},"animations":[],"page_form":"","compId":"suspension3","list_style":"margin-bottom:2.34375rpx;border-radius:;background-color:rgba(0,0,0,0.5);margin-left:auto;","suspension_bottom":70},"has_tabbar":1,"page_hidden":true,"page_form":"","top_nav":{"navigationBarTitleText":"\u9996\u9875", canIUse: wx.canIUse('button.open-type.getUserInfo')}},
     need_login: false,
     page_router: 'o9j42s2GS3_page10004',
     page_form: 'none',
@@ -30,7 +30,9 @@ var pageData = {
   modelChoose: [],
   modelChooseId: '',
   modelChooseName: [],
+
   onLoad: function (e) {
+
     app.onPageLoad(e);
     app.isNeedRewardModal();
   },
@@ -408,7 +410,7 @@ var pageData = {
   },
   // 视频项目暂停事件
   videoProjectPause: function(e) {
-    app.videoProjectPause(e);
+    app.videoProjectPaquse(e);
   },
   // 跳转到资讯详情
   turnToNewsDetail: function (e) {
@@ -429,6 +431,50 @@ var pageData = {
   },
   tapMaskClosePopupWindow: function(e){
     app.tapMaskClosePopupWindow(e);
+  },
+  test: function(e) {
+    wx.navigateTo({
+      url: '/pages/answer/answer_simulate_tip/simulate_tip',
+    })
+  },
+  bindGetUserInfo:function (e) {
+    let user_info = wx.getStorageSync('userInfo')
+    if(user_info.passport) {
+      wx.navigateTo({
+        url: '/userCenter/pages/moreInfo/moreInfo',
+      })
+    } else {
+      wx.navigateTo({
+        url: '/pages/userCenter/userCenter',
+      })
+    }
+    if (e.detail.userInfo){
+      //用户按了允许授权按钮
+    } else {
+      //用户按了拒绝按钮
+      wx.showModal({
+        title: 'alert',
+        content: '取消授权将无法使用应用“国教预约”？',
+        showCancel: false,
+        cancelText: "否",
+        confirmText: "是",
+      })
+    }
+
+
+  },
+  tip:function(e) {
+    wx.showModal({
+      title: 'tip',
+      content: 'this function is in developing...',
+      cancelText:'cancel',
+      confirmText:'confirm'
+    })
+  },
+  bind_notice: function() {
+    wx.navigateTo({
+      url: '/pages/userCenter/newpages',
+    })
   }
 };
 Page(pageData);

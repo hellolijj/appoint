@@ -2,81 +2,23 @@
 <component-share pageQRCodeData="{{pageQRCodeData}}"></component-share>
 <component-reward-point rewardPointObj="{{rewardPointObj}}"></component-reward-point>
 <view class="goods-detail-wrap" hidden="{{ page_hidden }}">
-  <view class="goods-detail-nav">
-  <view wx:if="{{ goodsInfo.goods_type == 1 }}" >
-    <view class="pull-right ico-moon icon-takeout-cellphone" bindtap="makePhoneCall" hidden="{{ !appointmentPhone }}"></view>   
-    <view class="pull-right ico-moon icon-share" bindtap="showQRCodeComponent"></view>
-  </view>
-  <view wx:elif="{{ goodsInfo.goods_type == 0 }}">
-    <view class="pull-right ico-moon icon-notebook" bindtap="goToMyOrder"></view>
-    <view class="pull-right ico-moon icon-shoppingcart" bindtap="goToShoppingCart">
-      <view class="goods-detail-cart-num" wx:if="{{ cartGoodsNum && cartGoodsNum != 0 }}">{{ cartGoodsNum }}</view>
-    </view>
-    <view class="pull-right ico-moon icon-share" bindtap="showQRCodeComponent"></view>
-  </view>
-  </view>
   <view class="goods-detail-content">
     <view class="goods-detail-section">
       <view class="goods-cover-container" wx:if="{{ !goodsInfo.img_urls }}">
         <image src="{{ goodsInfo.cover }}" mode="aspectFill"></image>
       </view>
-<!--       <view class="goods-cover-container" style="width:{{ goodsCoverWidth }}px; height:{{ goodsCoverHeight }}px;" wx:if="{{ !goodsInfo.img_urls }}">
-        <image src="{{ goodsInfo.cover }}" mode="aspectFit" onload="goodsCoverOnload"></image>
-      </view> -->
-      <view class="slick-carousel-container" wx:else>
-        <swiper indicator-dots="{{ indicatorDots }}" circular="true"
-          autoplay="true" interval="5000" duration="1000">
-          <block wx:for="{{ goodsInfo.img_urls }}" wx:key="">
-            <swiper-item>
-              <image src="{{ item }}" mode="aspectFit" class="slide-image"></image>
-            </swiper-item>
-          </block>
-        </swiper>
-      </view>
-      <view wx:if="{{ isSeckill }}" class="goods-seckill">
-        <view class="goods-seckill-left">
-          <view class="goods-seckill-current">
-            <view class="goods-current-price"><text>¥ </text><text class="goods-seckill-price">{{ goodsInfo.seckill_highPrice > goodsInfo.seckill_lowPrice && goodsInfo.seckill_lowPrice != 0 ? (goodsInfo.seckill_lowPrice+' ~ '+goodsInfo.seckill_highPrice) : goodsInfo.seckill_price}}</text></view>
-          </view>
-          <view class="goods-seckill-original">
-            <text class="goods-original-price">¥ {{ goodsInfo.highPrice > goodsInfo.lowPrice && goodsInfo.lowPrice != 0 ? (goodsInfo.lowPrice+' ~ '+goodsInfo.highPrice) : goodsInfo.price}}</text>
-            <view class="goods-seckill-sign"><view class="ico-moon icon-business-time"></view>秒杀商品</view>
-          </view>
-        </view>
-        <view class="goods-seckill-right {{ goodsInfo.seckill_start_state == 2 ? 'seckill-end' : ''}}">
-          <view class="countdown">
-            <label wx:if="{{goodsInfo.seckill_start_state == 0}}">距开始</label>
-            <label wx:elif="{{goodsInfo.seckill_start_state == 1}}">距结束还剩</label>
-            <label wx:elif="{{goodsInfo.seckill_start_state == 2}}">已结束</label>
-            <text class="hours">{{goodsInfo.downCount.hours}}</text>:<text class="minutes">{{goodsInfo.downCount.minutes}}</text>:<text class="seconds">{{goodsInfo.downCount.seconds}}</text>
-          </view>
-        </view>
-      </view>
       <view class="goods-header">
         <!-- <button class="pull-right goods-share" open-type="share"><text class="ico-moon icon-share"></text><view>分享</view></button> -->
         <view class="goods-title">{{ goodsInfo.title }}</view>
-        <view wx:if="{{!isSeckill }}" class="goods-price">
-          <view class="goods-current-price">
-            <text style="margin-right:3px;font-size:18px;">¥</text><text style="font-weight:bold; font-size:20px;">{{ goodsInfo.highPrice > goodsInfo.lowPrice && goodsInfo.lowPrice != 0 ? (goodsInfo.lowPrice+' ~ '+goodsInfo.highPrice) : (goodsInfo.goods_type != '1' ? goodsInfo.price : (goodsInfo.price != '0.00' ? goodsInfo.price  : '免费'))}}</text>
-            <text class="virtualPrice" wx:if="{{ isShowVirtualPrice}}">{{ goodsInfo.virtual_price != 0 ? '￥' + goodsInfo.virtual_price :  (goodsInfo.virtual_highPrice  ? ('￥' + goodsInfo.virtual_highPrice) : '') }}</text>
-          </view>
-          <view class="goods-price-discount" wx:if="{{ priceDiscountStr != '' }}">{{ priceDiscountStr }}</view>
-        </view>
+        
         <view class="goods-models" wx:if="{{ goodsInfo.model_items.length }}">
           <view class="goods-model-item" wx:for="{{ goodsInfo.model }}" wx:key="" hidden = "{{!item.subModelName}}">
             <text class="goods-model-cate">{{ item.name }}</text>
             <text class="goods-model-detail">{{ modelStrs[item.id] }}</text>
           </view>
         </view>
-        <view class="goods-other-info" wx:if="{{ goodsInfo.goods_type == 0 }}">
-          <view>运费:{{ goodsInfo.express_fee || '包邮' }}</view>
-          <view wx:if="{{!hidestock}}">库存:{{ allStock || goodsInfo.stock }}</view>
-        </view>
+        
       </view>
-    </view>
-    <view  class="goods-appointment" wx:if="{{ goodsInfo.goods_type == 1 }}">
-          <view class="appointment-instructions" style="color:#666;">预约说明</view>
-          <text class="appointment-remarks" style='color:#999;word-break:break-all;'>{{appointmentDesc}}</text>
     </view>
     <view style="padding: 20rpx;text-align:center;background:#f4f4f4;color:#b2b2b2;font-size:24rpx;" hidden="{{displayComment}}">
       <view class="line"></view>
@@ -110,46 +52,19 @@
       <view class="line"></view>
     </view>
     <view class="goods-detail-section">
-      <view class="comment-title"><view style="border-bottom: 1px solid #f4f4f4;padding-bottom:20rpx;">产品详情</view></view>
+      <view class="comment-title"><view style="border-bottom: 1px solid #f4f4f4;padding-bottom:20rpx;">预约说明</view></view>
       <view class="goods-details">
         <template is="wxParse" data="{{ wxParseData: wxParseDescription.nodes }}" />
       </view>
     </view>
   </view>
   <view class="goods-bottom-opt">
-    <view wx:if="{{ goodsInfo.goods_type == 1 }}" class="goods-appointment-bottom-bar">
-      <view class="appointment-logo-wrap">
-        <view class="goods-opt-item flex-sub-box-2" bindtap="goToMyOrder">
-          <text class="ico-moon icon-notebook"></text>
-          <view>订单</view>
-        </view>
-        <view class="goods-opt-item flex-sub-box-2" bindtap="goToHomepage">
-          <text class="ico-moon icon-store2"></text>
-          <view>店铺</view>
-        </view>
-      </view>  
-      <label class="btn btn-orange make-appointment" bindtap="makeAppointment">去预约</label>
+    <view wx:if="{{ goodsInfo.goods_type == 1 }}" class="goods-appointment-bottom-bar" style="display: block;">
+      <form report-submit="true" bindsubmit="makeAppointment">
+        <button class="btn btn-orange make-appointment" formType="submit">to make an appointment</button>
+      </form>
     </view>
-    <block wx:elif="{{ goodsInfo.goods_type == 0 }}">
-      <view class="flex-sub-box-3">
-        <view class="goods-opt-item flex-sub-box-2">
-          <view class="ico-moon icon-service2">
-            <contact-button type="default-dark" size="20" session-from="goodsDetail"></contact-button>
-          </view>
-          <view>客服</view>
-        </view>
-        <view class="goods-opt-item flex-sub-box-2" bindtap="goToHomepage">
-          <text class="ico-moon icon-store2"></text>
-          <view>店铺</view>
-        </view>
-      </view>
-      <view class="flex-sub-box-3">
-        <label class="btn addToShoppingCart {{ (isSeckill && goodsInfo.seckill_start_state == 2) ? 'disabled' : ''}}" bindtap="showAddToShoppingCart">加入购物车</label>
-      </view>
-      <view class="flex-sub-box-3">
-        <label class="btn btn-orange buy-goods-directly {{ (isSeckill && goodsInfo.seckill_start_state != 1) ? 'disabled' : ''}}" bindtap="showBuyDirectly">立即购买</label>
-      </view>
-    </block>
+    
   </view>
 </view>
 <view id="payDialog" class="page-dialog-wrap" hidden="{{ addToShoppingCartHidden }}">
@@ -164,12 +79,6 @@
         </view>
         <view class="pay-goods-baseinfo">
           <view class="pay-goods-title ellipsis">{{ goodsInfo.title }}</view>
-          <view class="pay-goods-price">
-            <view class="pay-current-price">
-              ¥ <text style="font-weight:bold; font-size:18px;">{{ selectModelInfo.price }}</text>
-                <text class="virtualPrice" wx:if="{{ isShowVirtualPrice && selectModelInfo.virtualPrice != 0 }}">￥{{selectModelInfo.virtualPrice}}</text>
-            </view>
-          </view>
           <view wx:if="{{selectModelInfo.models_text}}" class="pay-checked-text clearfix">已选：{{ selectModelInfo.models_text }}</view>
         </view>
       </view>

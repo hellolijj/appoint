@@ -1,0 +1,43 @@
+<view class="container">
+  <view class="page-body">
+    <view class="page__hd">
+      <view class="page__title">预约制作清单（appoint list）</view>
+      <view class="page__desc">Students who need certificates must make appointments successfully in advance for at least 5 work days through this programme. Certificates can not be provided on the spot in school offices.</view>
+      
+    </view>
+    <view class="page-section">
+      <view class="page-section-title">预约项目列表</view>
+      <view class="weui-cells weui-cells_after-title">
+        <checkbox-group bindchange="checkboxChange">
+          <label class="weui-cell weui-check__label" wx:for="{{items}}" wx:key="{{item.value}}">
+            <view class="weui-cell__hd">
+              <checkbox value="{{item.value}}" checked="{{item.checked}}" />
+            </view>
+            <view class="weui-cell__bd">{{item.name}}</view>
+          </label>
+        </checkbox-group>
+      </view>
+    </view>
+
+    <view class="page-section">
+      <view class="page-section-title">备注 Remarks</view>
+      <view class="weui-cells weui-cells_after-title">
+        <view class="weui-cell weui-cell_input">
+          <view class="weui-cell__bd">
+            <input class="weui-input" name="input" placeholder="备注可自由填写" bindinput="inputRemark" />
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-msg__opr-area">
+      <view class="weui-btn-area">
+        <button class="weui-btn" type="primary" bindtap='next'>next</button>
+      </view>
+
+    </view>
+    
+    
+
+  </view>
+</view>

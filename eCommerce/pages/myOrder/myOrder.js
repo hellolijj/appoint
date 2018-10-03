@@ -107,7 +107,15 @@ Page({
           data['goodsTypeList'].push(data['currentGoodsType']);
         }
         that.setData(data);
-      }
+      },
+      successStatusAbnormal: function(e) {
+        if(e.status == 1 && e.nouid == 'nouid') {
+          wx.navigateTo({
+            url: '/pages/userCenter/userLogin',
+          })
+        }
+      },
+      
     })
   },
   clickOrderTab: function(e){
@@ -178,6 +186,7 @@ Page({
         subShopId = franchisee == app.getAppId() ? '' : franchisee,
         that = this;
 
+
     app.showModal({
       content: '确定要取消订单？',
       showCancel: true,
@@ -188,7 +197,8 @@ Page({
           url: '/index.php?r=AppShop/cancelOrder',
           data: {
             order_id: orderId,
-            sub_shop_app_id: subShopId
+            sub_shop_app_id: subShopId,
+            formId: e.detail.formId,
           },
           success: function(res){
             var index = that.data.currentTabIndex,

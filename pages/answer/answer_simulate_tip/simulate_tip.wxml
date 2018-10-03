@@ -1,0 +1,13 @@
+<view class="simulate-tx">
+    <image  mode="aspectFill" src="{{userInfo.cover_thumb}}"></image>
+</view>
+<view class="simulate-name">{{userInfo.nickname}}</view>
+<view class="simulate-info">
+    <view> Number of exams：50</view>
+    <view> Examination time：45 minutes</view>
+    <view> The standard of pass：Out of 100 points, 80 points pass</view> 
+    <view> Problem rule: Random questions</view>
+</view>
+<navigator url="/pages/answer/answer_simulate_info/simulate_info?subject=kemu1&type={{type}}" redirect class="simulate-btn">Start the exam</navigator>
+
+<navigator url="/pages/answer/answer_simulate_tip/simulate_list" class="record-btn">Test record</navigator>

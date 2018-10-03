@@ -1,30 +1,41 @@
-<view class="app" hidden="{{page_hidden}}"><web-view wx-if="{{false}}" src="{{false}}"></web-view><component-share pageQRCodeData="{{pageQRCodeData}}"></component-share>
-<component-backhome backToHomePage="{{backToHomePage}}"></component-backhome>
-<component-reward-point rewardPointObj="{{rewardPointObj}}"></component-reward-point>
-<component-shop-vip shopVipModal="{{shopVipModal}}"></component-shop-vip>
-<template name="zcUserCenter">
-  <view class="user-center usercenter-mode1 background-ele {{ data.customFeature['with-horizontal'] ? 'with-horizontal-view': '' }}" style="{{data.style}}">
-      <view wx:if="{{data.customFeature['personal-mode'] == 1 || !data.customFeature['personal-mode']}}" class="show-view" catchtap="userCenterTurnToPage" data-router="/pages/userCenter/userCenter" style="{{ (data.customFeature.topSectionStyle['background-image'] ? ('background-image:' + data.customFeature.topSectionStyle['background-image']) : ('background-color:' + data.customFeature.topSectionStyle['background-color']) ) + ';opacity:' + (data.customFeature.topSectionStyle.opacity || 1) }}">
-      <label class="empty-span"></label>
-      <image class="cover-thumb" src="{{ userInfo.cover_thumb || 'http://img.zhichiwangluo.com/zc_app_default_photo.png'}}"></image>
-        <label class="nickname" style="{{'color:'+data.customFeature.topSectionStyle.color+';font-size:'+data.customFeature.topSectionStyle['font-size']+';font-style:'+data.customFeature.topSectionStyle['font-style']+';text-decoration:'+data.customFeature.topSectionStyle['text-decoration']+';font-weight:'+data.customFeature.topSectionStyle['font-weight']+';'}}">{{ userInfo.nickname || '用户名' }}</label>
-      <label class="ico-moon icon-rightarrow"></label>
-    </view>
-      <view wx:if="{{data.customFeature['personal-mode'] == 2}}" class="show-view" catchtap="userCenterTurnToPage" data-router="/pages/userCenter/userCenter" style="{{'text-align: center;height:'+ data.customFeature.topSectionStyle.topHeight + ';'+ (data.customFeature.topSectionStyle['background-image'] ? ('background-image:' + data.customFeature.topSectionStyle['background-image']) : ('background-color:' + data.customFeature.topSectionStyle['background-color']) )+ ';opacity:' + (data.customFeature.topSectionStyle.opacity || 1)}}">
+<view class="app" hidden="{{page_hidden}}">
+  <template name="zcUserCenter">
+    <view  class="user-center usercenter-mode1 background-ele {{ data.customFeature['with-horizontal'] ? 'with-horizontal-view': '' }}" style="{{data.style}}">
+      <button open-type="getUserInfo" class="show-view" bindgetuserinfo="bindGetUserInfo" style="{{ (data.customFeature.topSectionStyle['background-image'] ? ('background-image:' + data.customFeature.topSectionStyle['background-image']) : ('background-color:' + data.customFeature.topSectionStyle['background-color']) ) + ';opacity:' + (data.customFeature.topSectionStyle.opacity || 1) }}" style="background-color:rgb(205, 205, 205);opacity:1;border-radius:0;padding-left:0;font-size:20px;text-align: left; color: #fff;">
         <label class="empty-span"></label>
-        <view style="display:inline-block;vertical-align:middle;">
-          <image style="margin:0 0 10px 0;width: {{data.customFeature.topSectionStyle.coverHeight}};height: {{data.customFeature.topSectionStyle.coverHeight}}" class="cover-thumb" src="{{ userInfo.cover_thumb || 'http://img.zhichiwangluo.com/zc_app_default_photo.png'}}"></image>
-          <view class="nickname" style="{{'color:'+data.customFeature.topSectionStyle.color+';font-size:'+data.customFeature.topSectionStyle['font-size']+';font-style:'+data.customFeature.topSectionStyle['font-style']+';text-decoration:'+data.customFeature.topSectionStyle['text-decoration']+';font-weight:'+data.customFeature.topSectionStyle['font-weight']+';'}}">{{ userInfo.nickname || '用户名' }}</view>
-        </view>
-        <label class="empty-span"></label>  
-      </view>
+        <image class="cover-thumb" src="{{ userInfo.avatar || 'http://img.zhichiwangluo.com/zc_app_default_photo.png'}}"></image>
+        <label class="nickname" style="{{'color:'+data.customFeature.topSectionStyle.color+';font-size:'+data.customFeature.topSectionStyle['font-size']+';font-style:'+data.customFeature.topSectionStyle['font-style']+';text-decoration:'+data.customFeature.topSectionStyle['text-decoration']+';font-weight:'+data.customFeature.topSectionStyle['font-weight']+';'}}">{{ userInfo.name || userInfo.nickname }}</label>
+        <label class="ico-moon icon-rightarrow"></label>
+      </button>
+
+
+
+
+
+      <!--<view class="show-view" catchtap="userCenterTurnToPage" data-router="/pages/userCenter/userCenter" style="{{ (data.customFeature.topSectionStyle['background-image'] ? ('background-image:' + data.customFeature.topSectionStyle['background-image']) : ('background-color:' + data.customFeature.topSectionStyle['background-color']) ) + ';opacity:' + (data.customFeature.topSectionStyle.opacity || 1) }}">-->
+          <!--<label class="empty-span"></label>-->
+          <!--<image class="cover-thumb" src="{{ userInfo.cover_thumb || 'http://img.zhichiwangluo.com/zc_app_default_photo.png'}}"></image>-->
+          <!--<label class="nickname" style="{{'color:'+data.customFeature.topSectionStyle.color+';font-size:'+data.customFeature.topSectionStyle['font-size']+';font-style:'+data.customFeature.topSectionStyle['font-style']+';text-decoration:'+data.customFeature.topSectionStyle['text-decoration']+';font-weight:'+data.customFeature.topSectionStyle['font-weight']+';'}}">{{ userInfo.nickname || 'username' }}</label>-->
+          <!--<label class="ico-moon icon-rightarrow"></label>-->
+      <!--</view>-->
+
+      <!--<button open-type="getUserInfo" class="show-view" catchtap="userCenterTurnToPage" data-router="/pages/userCenter/userCenter" style="{{ (data.customFeature.topSectionStyle['background-image'] ? ('background-image:' + data.customFeature.topSectionStyle['background-image']) : ('background-color:' + data.customFeature.topSectionStyle['background-color']) ) + ';opacity:' + (data.customFeature.topSectionStyle.opacity || 1)}}" style="button:{border-radius:0}">-->
+        <!--<label class="empty-span"></label>-->
+        <!--<image class="cover-thumb" src="{{ userInfo.cover_thumb || 'http://img.zhichiwangluo.com/zc_app_default_photo.png'}}"></image>-->
+        <!--<label class="nickname" style="{{'color:'+data.customFeature.topSectionStyle.color+';font-size:'+data.customFeature.topSectionStyle['font-size']+';font-style:'+data.customFeature.topSectionStyle['font-style']+';text-decoration:'+data.customFeature.topSectionStyle['text-decoration']+';font-weight:'+data.customFeature.topSectionStyle['font-weight']+';'}}">{{ userInfo.nickname || 'username' }}</label>-->
+        <!--<label class="ico-moon icon-rightarrow"></label>-->
+      <!--</button>-->
+
+      <!--<button open-type="getUserInfo"></button>-->
+
       <view class="user-center-content">
         <block wx:for="{{data.content}}" wx:for-item="item" wx:key="" wx:for-index="i">
           <view class="usercenter-block" style="{{'color: ' + item.color +'; margin-top:' + (data.customFeature.blockStyle['margin-top'] || '10px') +'; ' + (item['background-image'] ? 'background-image: '+ item['background-image'] +'; ' : 'background-color:' + (item['background-color'] || '#fff') + ';')+ 'text-decoration: '+ (item['text-decoration'] || '')+'; font-style:'+ (item['font-style'] || '') + '; font-weight:'+ (item['font-weight'] || '') + '; opacity:' + (data.customFeature.blockStyle['opacity'] || 1) }}">
             <view class="block-name" wx:if="{{item.showName}}" style="font-size: {{item['font-size']}};">{{item.name}}</view>
             <view class="block-detail" style="color: {{item.color || 'rgb(89, 96, 123)'}};line-height:{{item['line-height']}};">
               <block wx:for="{{item.blockArr}}" wx:key="" wx:for-item="blockItem" wx:for-index="j">
-                <view class="block-item mode-one" bindtap="{{blockItem.action.bindtap}}" data-router="{{blockItem.action.router}}" data-open-verify-phone="{{blockItem.openVerifyPhone || false}}" wx:if="{{item.mode == 1 || !item.mode}}" style="text-align: center;display:inline-block;width: calc(100% / {{item.col}});" data-event-params="{{blockItem.action.param}}">
+                <view class="block-item mode-one" bindtap="{{blockItem.action.bindtap}}" data-router="{{blockItem.action.router}}" data-open-verify-phone="{{blockItem.openVerifyPhone || false}}" wx:if="{{item.mode == 1 || !item.mode}}" style="text-align: center;display:inline-block;width: calc(100% / {{item.col}});"
+                  data-event-params="{{blockItem.action.param}}">
                   <view style="line-height:normal;">
                     <view wx:if="{{!blockItem.custom}}" style="font-size: {{item.imgHeight}};font-style:normal;" class="ico-moon {{blockItem.icon}}"></view>
                     <image wx:if="{{blockItem.custom}}" src="{{blockItem.custom}}" style="width:{{item.imgHeight}}; height: {{item.imgHeight}}"></image>
@@ -41,236 +52,94 @@
           </view>
         </block>
       </view>
-      <block wx:if="{{ data.customFeature['appendComponent'] }}">
-      <view class="horizontal-view">
-        <view class="horizontal-router-container1">
-          <block>
-            <wxs module="myOrder">
-              var isMyorder = function(data){
-                return data.customFeature.appendComponent.indexOf('myOrder') >= 0 ? true : false;
-              }
-              module.exports.isMyorder = isMyorder;
-            </wxs>
-            <view wx:if="{{ myOrder.isMyorder(data) && data.customFeature.orderType == undefined}}" 
-                  catchtap="userCenterTurnToPage"
+      <block>
+        <view class="horizontal-view">
+          <view class="horizontal-router-container1">
+            <view style="margin-top: {{ data.customFeature.appendComponentAttr['coupon']['margin-top'] }}" bindtap='test'>
+              <label class="ico-moon icon-coupon"></label>
+              <text>My test</text>
+              <label class="ico-moon icon-rightarrow"></label>
+            </view>
+            <view catchtap="userCenterTurnToPage"
                   data-router="/eCommerce/pages/myOrder/myOrder"
                   data-goods-type="{{ data.customFeature.orderType }}"
-                  data-open-verify-phone="{{ data.customFeature.appendComponentAttr['myOrder']['openVerifyPhone'] }}"
                   style="margin-top: {{ data.customFeature.appendComponentAttr['myOrder']['margin-top'] }}">
               <label class="ico-moon icon-notebook"></label>
-              <text>我的订单</text>
+              <text>My appointment</text>
               <label class="ico-moon icon-rightarrow"></label>
             </view>
-            <view wx:elif="{{ myOrder.isMyorder(data) && data.customFeature.orderType == 0}}" 
-                  catchtap="userCenterTurnToPage"
-                  data-router="/eCommerce/pages/myOrder/myOrder"
-                  data-goods-type="{{ data.customFeature.orderType }}"
-                  data-open-verify-phone="{{ data.customFeature.appendComponentAttr['myOrder']['openVerifyPhone'] }}"
-                  style="margin-top: {{ data.customFeature.appendComponentAttr['myOrder']['margin-top'] }}"
-                  class="orderTypeStyle">
-              <view class="myorderSubmenu" data-index="0"><text data-index="0">我的订单</text><label class="ico-moon icon-rightarrow" data-index="0"></label></view>
-              <view class="orderSubmenu"><view data-index="1"><text class="ico-moon icon-pendingPayment" data-index="1"></text><view class="countStatusOrder" hidden="{{ data.countStatusOrder[0] == 0 || data.countStatusOrder == undefined}}">{{ data.countStatusOrder[0] }}</view>待付款</view><view data-index="2"><text class="ico-moon icon-beDelivered" data-index="2"></text><view class="countStatusOrder" hidden="{{ data.countStatusOrder[1] == 0 || data.countStatusOrder == undefined}}">{{ data.countStatusOrder[1] }}</view>待发货</view><view data-index="3"><text class="ico-moon icon-beReceived" data-index="3"></text><view class="countStatusOrder" hidden="{{ data.countStatusOrder[2] == 0 || data.countStatusOrder == undefined}}">{{ data.countStatusOrder[2] }}</view>待收货</view><view data-index="4"><text class="ico-moon icon-beEvaluated" data-index="4"></text><view class="countStatusOrder" hidden="{{ data.countStatusOrder[3] == 0 || data.countStatusOrder == undefined}}">{{ data.countStatusOrder[3] }}</view>待评价</view></view>
-            </view>
-            <view wx:elif="{{ myOrder.isMyorder(data) && data.customFeature.orderType == 3}}" 
-                  catchtap="userCenterTurnToPage"
-                  data-router="/eCommerce/pages/myOrder/myOrder"
-                  data-goods-type="{{ data.customFeature.orderType }}"
-                  data-open-verify-phone="{{ data.customFeature.appendComponentAttr['myOrder']['openVerifyPhone'] }}"
-                  style="margin-top: {{ data.customFeature.appendComponentAttr['myOrder']['margin-top'] }}"
-                  class="orderTypeStyle">
-              <view class="myorderSubmenu" data-index="0"><text data-index="0">我的订单</text><label class="ico-moon icon-rightarrow" data-index="0"></label></view>
-              <view class="orderSubmenu"><view data-index="1"><text class="ico-moon icon-pendingPayment" data-index="1"></text><view class="countStatusOrder" hidden="{{ data.countStatusOrder[0] == 0 || data.countStatusOrder == undefined}}">{{ data.countStatusOrder[0] }}</view>待付款</view><view data-index="2"><text class="ico-moon icon-beConfirmed" data-index="2"></text><view class="countStatusOrder" hidden="{{ data.countStatusOrder[1] == 0 || data.countStatusOrder == undefined}}">{{ data.countStatusOrder[1] }}</view>待确认</view><view data-index="3"><text class="ico-moon icon-tostoreBusinessSure" data-index="3"></text><view class="countStatusOrder" hidden="{{ data.countStatusOrder[2] == 0 || data.countStatusOrder == undefined}}">{{ data.countStatusOrder[2] }}</view>商家确认</view><view data-index="4"><text class="ico-moon icon-beEvaluated" data-index="4"></text><view class="countStatusOrder" hidden="{{ data.countStatusOrder[3] == 0 || data.countStatusOrder == undefined}}">{{ data.countStatusOrder[3] }}</view>待评价</view></view>
-            </view>
-          </block>
-          <block wx:for="{{ data.customFeature.appendComponent }}" wx:key="">
-            <view wx:if="{{ item == 'myAddress' }}" 
-                  catchtap="userCenterTurnToPage" 
-                  data-router="/eCommerce/pages/myAddress/myAddress" 
-                  data-open-verify-phone="{{ data.customFeature.appendComponentAttr['myAddress']['openVerifyPhone'] }}"
-                  style="margin-top: {{ data.customFeature.appendComponentAttr['myAddress']['margin-top'] }}">
-              <label class="ico-moon icon-location"></label>
-              <text>地址管理</text>
-              <label class="ico-moon icon-rightarrow"></label>
-            </view>
-            <view wx:elif="{{ item == 'shoppingCart' }}"
-                  catchtap="userCenterTurnToPage"
-                  data-router="/eCommerce/pages/shoppingCart/shoppingCart"
-                  data-open-verify-phone="{{ data.customFeature.appendComponentAttr['shoppingCart']['openVerifyPhone'] }}"
-                  style="margin-top: {{ data.customFeature.appendComponentAttr['shoppingCart']['margin-top'] }}">
-              <label class="ico-moon icon-shoppingcart"></label>
-              <text>购物车</text>
-              <label class="ico-moon icon-rightarrow"></label>
-            </view>
-            <view wx:elif="{{ item == 'myMessage' }}"
-                  catchtap="userCenterTurnToPage"
-                  data-router="/userCenter/pages/myMessage/myMessage"
-                  data-open-verify-phone="{{ data.customFeature.appendComponentAttr['myMessage']['openVerifyPhone'] }}"
-                  style="margin-top: {{ data.customFeature.appendComponentAttr['myMessage']['margin-top'] }}">
+            <view style="margin-top: {{ data.customFeature.appendComponentAttr['myMessage']['margin-top'] }}" bindtap='bind_notice'>
               <label class="ico-moon icon-notify"></label>
-              <text>系统通知</text>
+              <text>System notification</text>
               <label class="ico-moon icon-rightarrow"></label>
             </view>
-            <view wx:elif="{{ item == 'vipCard' }}"
-                  catchtap="userCenterTurnToPage"
-                  data-router="/eCommerce/pages/vipCard/vipCard"
-                  data-open-verify-phone="{{ data.customFeature.appendComponentAttr['vipCard']['openVerifyPhone'] }}"
-                  style="margin-top: {{ data.customFeature.appendComponentAttr['vipCard']['margin-top'] }}">
-              <label class="ico-moon icon-vip-card"></label>
-              <text>会员卡</text>
-              <label class="ico-moon icon-rightarrow"></label>
-            </view>
-            <view wx:elif="{{ item == 'coupon' }}"
-                  catchtap="userCenterTurnToPage"
-                  data-router="/eCommerce/pages/couponList/couponList"
-                  data-open-verify-phone="{{ data.customFeature.appendComponentAttr['coupon']['openVerifyPhone'] }}"
-                  style="margin-top: {{ data.customFeature.appendComponentAttr['coupon']['margin-top'] }}">
-              <label class="ico-moon icon-coupon"></label>
-              <text>优惠券</text>
-              <label class="ico-moon icon-rightarrow"></label>
-            </view>
-            <view wx:elif="{{ item == 'myIntegral' }}"
-                  catchtap="userCenterTurnToPage"
-                  data-router="/userCenter/pages/myIntegral/myIntegral"
-                  data-open-verify-phone="{{ data.customFeature.appendComponentAttr['myIntegral']['openVerifyPhone'] }}"
-                  style="margin-top: {{ data.customFeature.appendComponentAttr['myIntegral']['margin-top'] }}">
-              <label class="ico-moon icon-integral"></label>
-              <text>积分</text>
-              <label class="ico-moon icon-rightarrow"></label>
-            </view>
-            <view wx:elif="{{ item == 'balance' }}"
-                  catchtap="userCenterTurnToPage"
-                  data-router="/eCommerce/pages/balance/balance"
-                  data-open-verify-phone="{{ data.customFeature.appendComponentAttr['balance']['openVerifyPhone'] }}"
-                  style="margin-top: {{ data.customFeature.appendComponentAttr['balance']['margin-top'] }}">
-              <label class="ico-moon icon-balance"></label>
-              <text>储值金</text>
-              <label class="ico-moon icon-rightarrow"></label>
-            </view>
-            <view wx:elif="{{ item == 'myGroup' }}"
-                  catchtap="userCenterTurnToPage"
-                  data-router="/eCommerce/pages/myGroup/myGroup"
-                  data-open-verify-phone="{{ data.customFeature.appendComponentAttr['myGroup']['openVerifyPhone'] }}"
-                  style="margin-top: {{ data.customFeature.appendComponentAttr['myGroup']['margin-top'] }}">
-              <label class="ico-moon icon-group-buy"></label>
-              <text>我的拼团</text>
-              <label class="ico-moon icon-rightarrow"></label>
-            </view>
-            <view wx:elif="{{ item == 'winningRecord' }}"
-                  catchtap="userCenterTurnToPage"
-                  data-router="/userCenter/pages/winningRecord/winningRecord"
-                  data-open-verify-phone="{{ data.customFeature.appendComponentAttr['winningRecord']['openVerifyPhone'] }}"
-                  style="margin-top: {{ data.customFeature.appendComponentAttr['winningRecord']['margin-top'] }}">
-              <label class="ico-moon icon-winningRecord"></label>
-              <text>中奖记录</text>
-              <label class="ico-moon icon-rightarrow"></label>
-            </view>
-            <view wx:elif="{{ item == 'myVideo' }}"
-                  catchtap="userCenterTurnToPage"
-                  data-router="/video/pages/videoUsercenter/videoUsercenter"
-                  data-open-verify-phone="{{ data.customFeature.appendComponentAttr['myVideo']['openVerifyPhone'] }}"
-                  style="margin-top: {{ data.customFeature.appendComponentAttr['myVideo']['margin-top'] }}">
-              <label class="ico-moon icon-videousercenter"></label>
-              <text>我的视频</text>
-              <label class="ico-moon icon-rightarrow"></label>
-            </view>
-            <view wx:elif="{{ item == 'myPromotion' }}"
-                  catchtap="userCenterTurnToPage"
-                  data-router="myPromotion"
-                  data-open-verify-phone="{{ data.customFeature.appendComponentAttr['myPromotion']['openVerifyPhone'] }}"
-                  style="margin-top: {{ data.customFeature.appendComponentAttr['myPromotion']['margin-top'] }}">
-              <label class="ico-moon icon-promotionusercenter"></label>
-              <text>代言人中心</text>
-              <label class="ico-moon icon-rightarrow"></label>
-            </view>
-            <view wx:elif="{{ item == 'myFranchiseeEnter' }}"
-                  catchtap="userCenterTurnToPage"
-                  data-router="/franchisee/pages/franchiseeList/franchiseeList"
-                  data-open-verify-phone="{{ data.customFeature.appendComponentAttr['myFranchiseeEnter']['openVerifyPhone'] }}"
-                  style="margin-top: {{ data.customFeature.appendComponentAttr['myFranchiseeEnter']['margin-top'] }}">
-              <label class="ico-moon icon-franchisee-manager"></label>
-              <text>店铺管理</text>
-              <label class="ico-moon icon-rightarrow"></label>
-            </view>
-          </block>
+          </view>
+        </view>
+      </block>
+    </view>
+  </template>
+  <view class="ele-container">
+    <template is="zcUserCenter" data="{{data:user_center1, userInfo: userInfo}}"></template>
+  </view>
+  <template name="zcSuspension">
+    <view class="element suspension {{data.customFeature.mode == 1 ? 'suspension-sideways' : ''}}" data-compid="suspension2" style="{{data.style}}bottom: {{data.suspension_bottom}}rpx;">
+      <view class="" wx:for="{{data.content}}" wx:key="" data-event-params="{{item.eventParams}}" catchtap="{{item.eventHandler}}">
+        <view wx:if="{{item.customFeature.action == 'contact'}}" class="suspension-item diy" style="{{data.list_style}}">
+          <contact-button type="default-dark" size="20" session-from="suspension"></contact-button>
+          <image style="width:{{data.customFeature.width}};height:{{data.customFeature.height}}" src="{{item.pic}}"></image>
+        </view>
+        <view wx:else class="suspension-item diy" style="{{data.list_style}}">
+          <image class="old-and-new" style="width:{{data.customFeature.width}};height:{{data.customFeature.height}}" src="{{item.pic}}"></image>
         </view>
       </view>
-      </block>
-  </view>
-</template>
-<view class="ele-container">
-  <template is="zcUserCenter" data="{{data:user_center1, userInfo: userInfo}}"></template>
-</view>
-<template name="zcSuspension">
-  <view class="element suspension {{data.customFeature.mode == 1 ? 'suspension-sideways' : ''}}"
-               data-compid="suspension2"
-               style="{{data.style}}bottom: {{data.suspension_bottom}}rpx;" >
-    <view class="" wx:for="{{data.content}}"
-          wx:key= ""
-          data-event-params="{{item.eventParams}}"
-          catchtap="{{item.eventHandler}}">
-      <view wx:if="{{item.customFeature.action == 'contact'}}" class="suspension-item diy" style="{{data.list_style}}">
-        <contact-button type="default-dark" size="20" session-from="suspension"></contact-button>
-        <image style="width:{{data.customFeature.width}};height:{{data.customFeature.height}}" src="{{item.pic}}"></image>
-      </view>
-      <view wx:else class="suspension-item diy" style="{{data.list_style}}">
-        <image class="old-and-new" style="width:{{data.customFeature.width}};height:{{data.customFeature.height}}" src="{{item.pic}}"></image>
+      <view class="old-suspension" wx:if="{{data.customFeature.appendComponent}}">
+        <view class="suspension-item" data-type="service" wx:if="{{data.customFeature.appendComponent.service}}" style="{{data.list_style}}">
+          <icon class="ico-moon icon-service2 suspension-service">
+            <contact-button type="default-dark" size="20" session-from="suspension"></contact-button>
+          </icon>
+        </view>
+        <view class="suspension-item" data-router="myOrder" wx:if="{{data.customFeature.appendComponent.myOrder}}" catchtap="suspensionTurnToPage" style="{{data.list_style}}">
+          <icon class="ico-moon icon-notebook"></icon>
+        </view>
+        <view class="suspension-item" data-router="shoppingCart" wx:if="{{data.customFeature.appendComponent.shoppingCart}}" catchtap="suspensionTurnToPage" style="{{data.list_style}}">
+          <icon class="ico-moon icon-shoppingcart"></icon>
+        </view>
+        <view class="suspension-item" data-type="top" wx:if="{{data.customFeature.appendComponent.top}}" catchtap="scrollPageTop" style="{{data.list_style}}">
+          <icon class="ico-moon icon-top"></icon>
+        </view>
       </view>
     </view>
-    <view class="old-suspension" wx:if="{{data.customFeature.appendComponent}}">
-      <view class="suspension-item" data-type="service" wx:if="{{data.customFeature.appendComponent.service}}" style="{{data.list_style}}">
-        <icon class="ico-moon icon-service2 suspension-service">
-          <contact-button type="default-dark" size="20" session-from="suspension"></contact-button>
-        </icon>
-      </view>
-      <view class="suspension-item" data-router="myOrder" wx:if="{{data.customFeature.appendComponent.myOrder}}" catchtap="suspensionTurnToPage" style="{{data.list_style}}">
-        <icon class="ico-moon icon-notebook"></icon>
-      </view>
-      <view class="suspension-item" data-router="shoppingCart" wx:if="{{data.customFeature.appendComponent.shoppingCart}}" catchtap="suspensionTurnToPage" style="{{data.list_style}}">
-        <icon class="ico-moon icon-shoppingcart"></icon>
-      </view>
-      <view class="suspension-item" data-type="top" wx:if="{{data.customFeature.appendComponent.top}}" catchtap="scrollPageTop" style="{{data.list_style}}">
-        <icon class="ico-moon icon-top"></icon>
-      </view>
-    </view>
-  </view>
-</template>
+  </template>
 
-<template is="zcSuspension" data="{{data:suspension2}}"></template>
-<template name="zcSuspension">
-  <view class="element suspension {{data.customFeature.mode == 1 ? 'suspension-sideways' : ''}}"
-               data-compid="suspension3"
-               style="{{data.style}}bottom: {{data.suspension_bottom}}rpx;" >
-    <view class="" wx:for="{{data.content}}"
-          wx:key= ""
-          data-event-params="{{item.eventParams}}"
-          catchtap="{{item.eventHandler}}">
-      <view wx:if="{{item.customFeature.action == 'contact'}}" class="suspension-item diy" style="{{data.list_style}}">
-        <contact-button type="default-dark" size="20" session-from="suspension"></contact-button>
-        <image style="width:{{data.customFeature.width}};height:{{data.customFeature.height}}" src="{{item.pic}}"></image>
-      </view>
-      <view wx:else class="suspension-item diy" style="{{data.list_style}}">
-        <image class="old-and-new" style="width:{{data.customFeature.width}};height:{{data.customFeature.height}}" src="{{item.pic}}"></image>
-      </view>
-    </view>
-    <view class="old-suspension" wx:if="{{data.customFeature.appendComponent}}">
-      <view class="suspension-item" data-type="service" wx:if="{{data.customFeature.appendComponent.service}}" style="{{data.list_style}}">
-        <icon class="ico-moon icon-service2 suspension-service">
+  <template is="zcSuspension" data="{{data:suspension2}}"></template>
+  <template name="zcSuspension">
+    <view class="element suspension {{data.customFeature.mode == 1 ? 'suspension-sideways' : ''}}" data-compid="suspension3" style="{{data.style}}bottom: {{data.suspension_bottom}}rpx;">
+      <view class="" wx:for="{{data.content}}" wx:key="" data-event-params="{{item.eventParams}}" catchtap="{{item.eventHandler}}">
+        <view wx:if="{{item.customFeature.action == 'contact'}}" class="suspension-item diy" style="{{data.list_style}}">
           <contact-button type="default-dark" size="20" session-from="suspension"></contact-button>
-        </icon>
+          <image style="width:{{data.customFeature.width}};height:{{data.customFeature.height}}" src="{{item.pic}}"></image>
+        </view>
+        <view wx:else class="suspension-item diy" style="{{data.list_style}}">
+          <image class="old-and-new" style="width:{{data.customFeature.width}};height:{{data.customFeature.height}}" src="{{item.pic}}"></image>
+        </view>
       </view>
-      <view class="suspension-item" data-router="myOrder" wx:if="{{data.customFeature.appendComponent.myOrder}}" catchtap="suspensionTurnToPage" style="{{data.list_style}}">
-        <icon class="ico-moon icon-notebook"></icon>
-      </view>
-      <view class="suspension-item" data-router="shoppingCart" wx:if="{{data.customFeature.appendComponent.shoppingCart}}" catchtap="suspensionTurnToPage" style="{{data.list_style}}">
-        <icon class="ico-moon icon-shoppingcart"></icon>
-      </view>
-      <view class="suspension-item" data-type="top" wx:if="{{data.customFeature.appendComponent.top}}" catchtap="scrollPageTop" style="{{data.list_style}}">
-        <icon class="ico-moon icon-top"></icon>
+      <view class="old-suspension" wx:if="{{data.customFeature.appendComponent}}">
+        <view class="suspension-item" data-type="service" wx:if="{{data.customFeature.appendComponent.service}}" style="{{data.list_style}}">
+          <icon class="ico-moon icon-service2 suspension-service">
+            <contact-button type="default-dark" size="20" session-from="suspension"></contact-button>
+          </icon>
+        </view>
+        <view class="suspension-item" catchtap="userCenterTurnToPage"
+              data-router="/eCommerce/pages/myOrder/myOrder"
+              data-goods-type="{{ data.customFeature.orderType }}" style="{{data.list_style}}">
+          <icon class="ico-moon icon-notebook"></icon>
+        </view>
+       
+        
       </view>
     </view>
-  </view>
-</template>
+  </template>
 
-<template is="zcSuspension" data="{{data:suspension3}}"></template>
+  <template is="zcSuspension" data="{{data:suspension3}}"></template>
 
 </view>

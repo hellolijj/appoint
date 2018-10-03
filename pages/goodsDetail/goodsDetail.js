@@ -61,6 +61,7 @@ Page({
   dataInitial: function () {
     var that = this;
     app.sendRequest({
+      hideLoading: true,
       url: '/index.php?r=AppShop/getGoods',
       data: {
         data_id: this.data.goodsId,
@@ -68,10 +69,17 @@ Page({
         is_seckill: this.data.isSeckill ? 1 : ''
       },
       success: that.modifyGoodsDetail,
-      complete: function(){
-        that.setData({
-          page_hidden: false
-        })
+      complete: function(res){
+        if (res.status == 1 && res.nouid == 'nouid') {
+          wx.navigateTo({
+            url: '/pages/userCenter/userLogin',
+          })
+        } else {
+          that.setData({
+            page_hidden: false
+          })
+        }
+        console.log(res)
       }
     })
   },
@@ -196,7 +204,7 @@ Page({
         appointmentPhone; 
     this.setData({
       unitType: unitType || '',
-      appointmentDesc: goods.appointment_info && goods.appointment_info.appointment_desc ? goods.appointment_info.appointment_desc.replace(/<br \/>/g, "\r\n") : '更多优惠资讯详情请联系商家!',
+      appointmentDesc: goods.appointment_info && goods.appointment_info.appointment_desc ? goods.appointment_info.appointment_desc.replace(/<br \/>/g, "\r\n") : '签证预约是处理关于预约项目的',
       appointmentPhone: goods.appointment_info && goods.appointment_info.appointment_phone ? goods.appointment_info.appointment_phone:'',
       displayComment:goods.appointment_info &&  goods.appointment_info.display_comment == '1' ?goods.appointment_info.display_comment : ''
     });
@@ -260,10 +268,10 @@ Page({
         if(model && model.subModelName){
           if (key == '1' && goods.goods_type == '1'){
           for(var index in model.subModelName){
-            var adjustTime =  model.subModelName[index].split('-'),
-            submodel = model.subModelName[index].substring(6,8),
-            endHours = (submodel - 24) >= 10 ?  (submodel-24) : '0'+ (submodel - 24);
-            model.subModelName[index] = submodel >= 24 ?  adjustTime[0] + '-' + '次日' + endHours + ':' + adjustTime[1].split(':')[1]  :adjustTime[0] +  '-当日' + adjustTime[1] ;
+            // var adjustTime =  model.subModelName[index].split('-'),
+            // submodel = model.subModelName[index].substring(6,8),
+            // endHours = (submodel - 24) >= 10 ?  (submodel-24) : '0'+ (submodel - 24);
+            // model.subModelName[index] = submodel >= 24 ?  adjustTime[0] + '-' + '次日' + endHours + ':' + adjustTime[1].split(':')[1]  :adjustTime[0] +  '-' + adjustTime[1] ;
           }
         }
         if(goods.goods_type == '1' && model.id == '0'){
@@ -276,7 +284,6 @@ Page({
         selectModels.push(model.subModelId[0]);
         selectText += '“' + model.subModelName[0] + '” ';
         }
-
       }
     }
     goods.model = goodsModel;
@@ -515,12 +522,27 @@ Page({
       }
     })
   },
-  makeAppointment: function(){
+  makeAppointment: function(e){
     var franchiseeId = this.data.franchiseeId,
         unitTime = this.data.modelStrs[0] && this.data.modelStrs[0].substring(this.data.modelStrs[0].length-1),
         unitType = unitTime == '分' ? 1:(unitTime == '时'? 2 : 3),
         pagePath = '/eCommerce/pages/makeAppointment/makeAppointment?detail='+this.data.goodsId+(franchiseeId ? '&franchisee='+franchiseeId : '') +('&param=' + unitType)
-    app.turnToPage(pagePath);
+
+    app.sendRequest({
+      url: '/index.php?r=AppShop/collectFormid',
+      data: {
+        formid: e.detail.formId,
+      },
+      success: function (res) {
+      }
+    })
+    if (this.data.goodsId == 1241) {
+      wx.navigateTo({
+        url: '/pages/thirdpage/doc_appoint',
+      })
+    } else {
+      app.turnToPage(pagePath);
+    }
   },
   inputBuyCount: function(e){
     var count = +e.detail.value,

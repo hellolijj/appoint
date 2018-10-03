@@ -1,0 +1,70 @@
+<view class="app">
+  <template name="zcUserCenter">
+    <view class="user-center usercenter-mode1 background-ele {{ data.customFeature['with-horizontal'] ? 'with-horizontal-view': '' }}" style="{{data.style}}">
+      <block>
+        <view class="horizontal-view">
+          <view class="horizontal-router-container1">
+            <view style="margin-top: {{ data.customFeature.appendComponentAttr['coupon']['margin-top'] }}">
+              <label class="ico-moon icon-notebook"></label>
+              <text>name</text>
+              <text style="float:right">{{ userInfo.name }}</text>
+            </view>
+            <view style="margin-top: {{ data.customFeature.appendComponentAttr['myOrder']['margin-top'] }}">
+              <label class="ico-moon icon-notebook"></label>
+              <text>first name</text>
+              <text style="float:right">{{ userInfo.first_name }}</text>
+            </view>
+            <view style="margin-top: {{ data.customFeature.appendComponentAttr['myOrder']['margin-top'] }}">
+              <label class="ico-moon icon-notebook"></label>
+              <text>last name</text>
+              <text style="float:right">{{ userInfo.last_name }}</text>
+            </view>
+            <view style="margin-top: {{ data.customFeature.appendComponentAttr['myOrder']['margin-top'] }}">
+              <label class="ico-moon icon-notebook"></label>
+              <text>telphone number</text>
+              <text style="float:right">{{ userInfo.phone }}</text>
+            </view>
+            <view style="margin-top: {{ data.customFeature.appendComponentAttr['myMessage']['margin-top'] }}">
+              <label class="ico-moon icon-notebook"></label>
+              <text>passport</text>
+              <text style="float:right">{{ userInfo.passport }}</text>
+            </view>
+            <view style="margin-top: {{ data.customFeature.appendComponentAttr['myMessage']['margin-top'] }}">
+              <label class="ico-moon icon-notebook"></label>
+              <text>country</text>
+              <text style="float:right">{{ userInfo.country }}</text>
+            </view>
+            <view style="margin-top: {{ data.customFeature.appendComponentAttr['myMessage']['margin-top'] }}">
+              <label class="ico-moon icon-notebook"></label>
+              <text>major</text>
+              <text style="float:right">{{ userInfo.profession }}</text>
+            </view>
+            <view style="margin-top: {{ data.customFeature.appendComponentAttr['myMessage']['margin-top'] }}">
+              <label class="ico-moon icon-notebook"></label>
+              <text>college</text>
+              <text style="float:right">{{ userInfo.college }}</text>
+            </view>
+            <view style="margin-top: {{ data.customFeature.appendComponentAttr['myMessage']['margin-top'] }}">
+              <label class="ico-moon icon-notebook"></label>
+              <text>class</text>
+              <text style="float:right">{{ userInfo.class }}</text>
+            </view>
+            <view style="margin-top: {{ data.customFeature.appendComponentAttr['myMessage']['margin-top'] }}">
+              <label class="ico-moon icon-notebook"></label>
+              <text>student number</text>
+              <text style="float:right">{{ userInfo.number }}</text>
+            </view>
+            <view style="margin-top: {{ data.customFeature.appendComponentAttr['myMessage']['margin-top'] }}">
+              <label class="ico-moon icon-notebook"></label>
+              <text>entrance year</text>
+              <text style="float:right">{{ userInfo.entry_year }}</text>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </template>
+  <view class="ele-container">
+    <template is="zcUserCenter" data="{{data:user_center1 , userInfo: userInfo}}"></template>
+  </view>
+</view>

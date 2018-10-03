@@ -262,13 +262,13 @@ Page({
       else {
         if (res == 2) {
           app.showModal({
-            title: '提示',
+            title: 'alert',
             content: '话题己被屏蔽'
           });
           return;
         }
         app.showModal({
-          title: '提示',
+          title: 'alert',
           content: '话题己被删除'
         });
       }

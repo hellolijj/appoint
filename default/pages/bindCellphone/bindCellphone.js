@@ -92,6 +92,7 @@ Page({
   },
   nextStep: function(){
     var that = this;
+    that.refreshNewPhonePicCode();
     if(!this.data.oldCode){
       app.showModal({
         content: '请输入验证码'
@@ -300,6 +301,9 @@ Page({
     this.setData({
       newPhonePicCodeUrl: app.getSiteBaseUrl()+'/index.php?r=Login/GetIdentifyCode&i=' + parseInt(Math.random() * 10000000) + '&session_key='+app.getSessionKey()
     });
+  },
+  backStep: function() {
+    wx.navigateBack();
   }
 
 })

@@ -1,4 +1,3 @@
-
 var app = getApp()
 
 Page({
@@ -7,26 +6,30 @@ Page({
       nickname: '',
       sex: 0,
       cover_thumb: 'http://img.zhichiwangluo.com/zc_app_default_photo.png',
-      phone: ''
+      phone: '',
+      passport: '',
+      is_bind: '',
     },
     genderArr: ['男', '女'],
     isFromBack: false
   },
-  onLoad: function(){
+  onLoad: function () {
     var userInfo = app.getUserInfo(),
-        data = {
-          'userInfo.nickname': userInfo.nickname,
-          'userInfo.sex': userInfo.sex,
-          'userInfo.cover_thumb': userInfo.cover_thumb,
-          'userInfo.phone': userInfo.phone || ''
-        };
+      data = {
+        'userInfo.nickname': userInfo.nickname || '国教',
+        'userInfo.sex': userInfo.sex || 0,
+        'userInfo.cover_thumb': userInfo.cover_thumb || this.data.userInfo.cover_thumb,
+        'userInfo.phone': userInfo.phone || '',
+        'userInfo.passport': userInfo.passport || '',
+        'userInfo.is_bind': userInfo.is_bind || false,
+      };
 
     this.setData(data);
   },
-  onShow: function(){
-    if(this.data.isFromBack){
+  onShow: function () {
+    if (this.data.isFromBack) {
       var phone = app.getUserInfo().phone;
-      if(phone){
+      if (phone) {
         this.setData({
           'userInfo.phone': phone
         })
@@ -37,41 +40,63 @@ Page({
       });
     }
   },
-  choosePhoto: function(){
+  choosePhoto: function () {
     var that = this;
-    app.chooseImage(function(imgUrl){
+    app.chooseImage(function (imgUrl) {
       that.setData({
         'userInfo.cover_thumb': imgUrl[0]
       })
     });
   },
-  changeGender: function(e){
+  changeGender: function (e) {
     this.setData({
       'userInfo.sex': e.detail.value
     })
   },
-  inputNickname: function(e){
+  inputNickname: function (e) {
     this.setData({
       'userInfo.nickname': e.detail.value
     })
   },
-  saveUserInfo: function(){
+  inputPassport: function (e) {
+    this.setData({
+      'userInfo.passport': e.detail.value
+    })
+  },
+  inputPhone: function (e) {
+    this.setData({
+      'userInfo.phone': e.detail.value
+    })
+  },
+  saveUserInfo: function (e) {
     var data = this.data.userInfo;
-
+    // `data.formid` = e.detail.formId;
+    if (!data['phone'] || !data['passport']) {
+      return false
+    }
+      
+    data['formid'] = e.detail.formId;
     app.sendRequest({
       url: '/index.php?r=AppData/saveUserInfo',
       method: 'post',
       data: data,
-      success: function(res){
-        if(res.status === 0){
-          app.setUserInfoStorage(data);
-          app.turnBack();
+      success: function (res) {
+        if (res.status === 0) {
+          app.setUserInfoStorage(res.data);
+          wx.showToast({
+            title: "绑定成功"
+          })
+          wx.reLaunch({
+            url: '/pages/o9j42s2GS3_page10000/o9j42s2GS3_page10000',
+          })
         }
       }
     });
   },
-  bindCellphonePage: function(){
+  bindCellphonePage: function () {
     app.turnToPage('/default/pages/bindCellphone/bindCellphone');
-  }
-
+  },
+  moreUserInfo: function () {
+    app.turnToPage('/userCenter/pages/moreInfo/moreInfo');
+  },
 })

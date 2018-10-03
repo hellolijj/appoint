@@ -5,7 +5,7 @@ Page({
   data: {
     orderData: {},
     orderInfo: {},
-    orderStatus: { '0':'待付款', '1':'待商家确认', '2':'待消费', '3':'待评价', '4':'退款审核中', '5':'退款中', '6':'已消费', '7':'已关闭'},
+    orderStatus: { '2':'已预约', '5':'已处理'},
     selectAddressId: '',    
     goodsAdditionalInfo: {},
     hasAdditionalInfo: false,
@@ -87,13 +87,13 @@ Page({
     that = this,
       franchiseeId = this.data.franchiseeId;
     app.showModal({
-      content: '订单删除后不可找回，确认删除？',
+      content: '取消预约后需要重新预约，确认取消？',
       showCancel: true,
       cancelText: '取消',
       confirmText: '确定',
       confirm: function () {
         app.sendRequest({
-          url: '/index.php?r=AppShop/HideOrder',
+          url: '/index.php?r=AppShop/cancelOrder',
           data: {
             order_id: orderId,
             sub_shop_app_id: franchiseeId

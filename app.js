@@ -1,34 +1,23 @@
-var WxParse = require('components/wxParse/wxParse.js');
+// var WxParse = require('components/wxParse/wxParse.js');
 var util    = require('utils/util.js');
-
+const check3RdUrl = ''
 App({
   onLaunch: function () {
     let userInfo;
-    if (userInfo = wx.getStorageSync('userInfo')) {
-      this.globalData.userInfo = userInfo;
-    }
+    wx.clearStorageSync()
+    this._login();
     this.appInitial();
   },
+  
   appInitial: function () {
     let that = this;
-
     this._getSystemInfo({
       success: function (res) {
         that.setSystemInfoData(res);
       }
     });
-
-    wx.request({
-      url: this.globalData.siteBaseUrl +'/index.php?r=AppUser/MarkWxXcxStatus',
-      data: {
-        app_id: this.getAppId()
-      },
-      method: 'GET',
-      header: {
-        'content-type': 'application/json'
-      }
-    });
   },
+  
   onShow: function (options) {
     this.globalData.appOptions = options
     if( options && options.scene && (options.scene == 1011 || options.scene == 1012 || options.scene == 1013 || options.scene == 1007 || options.scene == 1008)){
@@ -136,7 +125,10 @@ App({
     }
 
     if(!this.globalData.notBindXcxAppId){
-      data.session_key = this.getSessionKey();
+      let storage_session_key = wx.getStorageSync('session_key');
+      let global_session_key = this.getSessionKey();
+      data.session_key = global_session_key ? global_session_key : storage_session_key;
+
     }
 
     if(customSiteUrl) {
@@ -149,7 +141,8 @@ App({
       if(param.method.toLowerCase() == 'post'){
         data = this._modifyPostParam(data);
         header = header || {
-          'content-type': 'application/x-www-form-urlencoded;'
+          //'content-type': 'application/json',
+          'content-type': 'application/x-www-form-urlencoded;',
         }
       }
       param.method = param.method.toUpperCase();
@@ -166,7 +159,7 @@ App({
       data: data,
       method: param.method || 'GET',
       header: header || {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
       },
       success: function (res) {
         if (res.statusCode && res.statusCode != 200) {
@@ -334,7 +327,7 @@ App({
   },
   showModal: function (param) {
     wx.showModal({
-      title: param.title || '提示',
+      title: param.title || 'alert',
       content: param.content,
       showCancel: param.showCancel || false,
       cancelText: param.cancelText || '取消',
@@ -702,7 +695,7 @@ App({
       complete: function (res) {     
         if (res && res.errMsg === 'chooseAddress:fail auth deny') {
           wx.showModal({
-            title: '提示',
+            title: 'alert',
             content: '获取通信地址失败，这将影响您使用小程序，是否重新设置授权？',
             showCancel: true,
             cancelText: "否",
@@ -862,6 +855,7 @@ App({
     })
   },
   _sendCode: function (code, options) {
+
     let that = this;
     let addTime = Date.now();
     this.sendRequest({
@@ -871,12 +865,31 @@ App({
         code: code
       },
       success: function (res) {
-        if (res.is_login == 2) {
-          that.globalData.notBindXcxAppId = true;
-        }
+
+        console.log(res)
+
+        // if (res.is_login == 2) {
+        //   that.globalData.notBindXcxAppId = true;
+        // }
         that.setSessionKey(res.data);
         that._requestUserInfo(res.is_login, options);
         that.loginForRewardPoint(addTime);
+
+
+        // 2表示没有注册
+        if (res.is_register != 3) {
+          wx.showModal({
+            title: 'alert',
+            content: '使用“国教预约”先完成绑定',
+            showCancel: false,
+            confirmText: "ok",
+            success: function (res) {
+              wx.navigateTo({
+                url: '/pages/userCenter/userLogin',
+              })
+            }
+          })
+        }
       },
       fail: function (res) {
         console.log('_sendCode fail');
@@ -900,7 +913,7 @@ App({
           that.setUserInfoStorage(res.data);
         }
         that.setIsLogin(true);
-        typeof options.success === 'function' && options.success();
+        // typeof options.success === 'function' && options.success();
       },
       fail: function (res) {
         console.log('_requestUserXcxInfo fail');
@@ -909,6 +922,7 @@ App({
   },
   _requestUserWxInfo: function (options) {
     let that = this;
+    console.log(that)
 
     wx.getUserInfo({
       success: function (res) {
@@ -916,8 +930,8 @@ App({
       },
       fail: function (res) {
         wx.showModal({
-          title: '提示',
-          content: '获取用户信息失败，这将影响您使用小程序，是否重新设置授权？',
+          title: 'alert',
+          content: '授权“国教预约”应用获取用户信息？',
           showCancel: true,
           cancelText: "否",
           confirmText: "是",
@@ -928,11 +942,16 @@ App({
                   if(res.authSetting['scope.userInfo'] === true){
                     that._requestUserWxInfo(options);
                   }
+                  wx.navigateTo({
+                    url: '/pages/userCenter/userLogin',
+                  })
                 }
               })
             } else if (res.cancel) {
               console.log('用户取消授权个人信息');
-              typeof options.fail == 'function' && options.fail();
+              wx.navigateTo({
+                url: '/pages/userCenter/userLogin',
+              })
             }
           }
         })
@@ -955,12 +974,12 @@ App({
       },
       success: function (res) {
         that.setUserInfoStorage(res.data.user_info);
-        typeof options.success === 'function' && options.success();
+        //typeof options.success === 'function' && options.success();
         that.setIsLogin(true);
       },
       fail: function (res) {
         console.log('_requestUserXcxInfo fail');
-        typeof options.fail == 'function' && options.fail(res);
+        //typeof options.fail == 'function' && options.fail(res);
       }
     })
   },
@@ -1215,7 +1234,7 @@ App({
           hideLoading: pageRequestNum++ == 1 ? false : true,
           url: url,
           data: {
-            type: carouselgroupId
+            type: carouselgroupId,
           },
           method: 'post',
           success: function (res) {
@@ -5403,13 +5422,21 @@ App({
     })
   },
   tapInnerLinkHandler: function (event) {
+    
     let param = event.currentTarget.dataset.eventParams,
         pageRoot = {
           'groupCenter': '/eCommerce/pages/groupCenter/groupCenter',
           'shoppingCart': '/eCommerce/pages/shoppingCart/shoppingCart',
           'myOrder': '/eCommerce/pages/myOrder/myOrder',
         };
-    if (param) {
+    param = JSON.parse(param);
+    let pageLink = param.inner_page_link;
+    console.log(pageLink)
+    wx.redirectTo({
+      url: '/pages/answer/answer_simulate_tip/simulate_tip',
+    })
+    
+    /*if (param) {
       param = JSON.parse(param);
       let pageLink = param.inner_page_link;
       let url = pageRoot[pageLink] ? pageRoot[pageLink] : '/pages/' + pageLink + '/' + pageLink ;
@@ -5419,8 +5446,9 @@ App({
         let is_redirect = param.is_redirect == 1 ? true : false;
         this.turnToPage(url, is_redirect);
       }
-    }
+    }*/
   },
+
   tapToPluginHandler: function (event) {
     let param = event.currentTarget.dataset.eventParams;
     if (param) {
@@ -6413,7 +6441,7 @@ App({
   },
   showUpdateTip: function () {
     this.showModal({
-      title: '提示',
+      title: 'alert',
       content: '您的微信版本不支持该功能，请升级更新后重试'
     });
   },
@@ -6509,7 +6537,9 @@ App({
     that.sendRequest({
       hideLoading: true,
       url: '/index.php?r=appShop/isNeedLogin',
-      data: {},
+      data: {
+        session_key: wx.getStorageSync('session_key'),
+      },
       success: function (res) {
         if (res.status == 0 && res.data == 1) {
           that.goLogin({});
@@ -6723,6 +6753,8 @@ App({
     this.globalData.systemInfo = res;
   },
 
+  
+
   globalData:{
     appId: 'mPxWOXi4p4',
         tabBarPagePathArr: '["/pages/o9j42s2GS3_page10000/o9j42s2GS3_page10000","/pages/o9j42s2GS3_page10006/o9j42s2GS3_page10006","/pages/o9j42s2GS3_page10004/o9j42s2GS3_page10004"]',
@@ -6752,10 +6784,14 @@ App({
     wxParseOldPattern: '_listVesselRichText_',
     cdnUrl: 'http://cdn.jisuapp.cn',
     defaultPhoto: 'http://cdn.jisuapp.cn/zhichi_frontend/static/webapp/images/default_photo.png',
-    siteBaseUrl: 'https://xcx.zhichiweiye.com',
+    // siteBaseUrl: 'https://xcx.zhichiweiye.com',
+    // siteBaseUrl: 'http://127.0.0.1/appoint',
+    // siteBaseUrl: 'http://192.168.1.109/appoint',
+  
+    siteBaseUrl: 'https://appoint.applinzi.com',
+      
     appTitle: '国教预约',
     appDescription: '国教系统预约平台',
     appLogo: 'http://img.zhichiwangluo.com/zcimgdir/album/file_5ac5774ba3fc4.jpg'
   }
 })
-

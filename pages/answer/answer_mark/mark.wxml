@@ -1,0 +1,15 @@
+<view class="score-header">
+    <view class="score-toux">
+      <image mode="aspectFill" src="{{avatar}}"></image>
+    </view>
+    <view class="score-name">{{nickName}}</view>
+    <view class="score-info">
+        <view class="score-num">mark：<view class="red">{{score}}</view>分</view>
+        <view class="score-time">time:<view class="red">{{minutes}}</view>minutes<view class="red">{{seconds}}</view>seconds</view>
+    </view>
+</view>
+<view class="score-chao-tip">{{tip}}</view>
+<view class="score-operation">
+    <view bindtap='examReStort' class="score-operation-btn">restart exam</view>
+    <view bindtap='gotoWDCT' class="score-operation-btn">exam review</view>
+</view>

@@ -156,6 +156,7 @@ a {
 }
 .app .ele-container {
   position: relative;
+  z-index: 1;
   width: 100%;
   max-width: 100%;
   clear: both;
@@ -173,7 +174,6 @@ a {
   padding-top: 23.4375rpx;
   min-height: 117.1875rpx;
   height: auto !important;
-  display: flex !important;
 }
 .app .layout-vessel .cell {
   position: relative;
@@ -692,6 +692,7 @@ a {
   -webkit-box-sizing:border-box;
   background-size: 100% 100%;
   background-repeat: no-repeat;
+  z-index: 1;
   border-color: #222222;
   border-width: 0;
 }
@@ -719,10 +720,6 @@ a {
   text-align: center;
   padding: 0;
   border-radius:0;
-  box-sizing: content-box;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
 }
 .app .picture {
   width: 234.375rpx;
@@ -739,11 +736,6 @@ a {
 .app .carousel {
 	width: auto !important;
 	height: 351.5625rpx;
-}
-.app .carousel swiper,
-.app .carousel image {
-  width: 100% !important;
-  height: 100% !important;
 }
 .app .carousel .slick-carousel {
 	width: 100%;
@@ -815,10 +807,6 @@ a {
   width: 234.375rpx;
   text-decoration: inherit;
 }
-.app .album-container.sideslip .album-pic {
-  float: none;
-  display: inline-block;
-}
 .app .album-container .album-pic > a {
   display: block;
   width: 100%;
@@ -836,7 +824,6 @@ a {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-  display: inline-block;
 }
 .app .album-container a {
 	text-decoration: inherit;
@@ -848,11 +835,6 @@ a {
 }
 .app .album-container image {
 	float: left;
-	width: 100%;
-	height: 240rpx;
-}
-.app .album-container.sideslip image {
-	float: none;
 	width: 100%;
 	height: 240rpx;
 }
@@ -1154,6 +1136,10 @@ a {
   height: 100%;
   vertical-align:middle;
 }
+.app .select-container .select-input {
+  position: absolute;
+  right: 0;
+}
 
 .app .input-ele {
 	width: 60%;
@@ -1315,78 +1301,75 @@ a {
   margin-right: 11.7rpx;
 }
 .app .bbs .empty-tip {
-  padding: 36rpx;
-  font-size: 38rpx;
+  margin-top: 35.15625rpx;
+  font-size: 37.5rpx;
   text-align: center;
   color: #666;
-  background-color:#fff;
-  padding-bottom: 124rpx;
+}
+.app .bbs .empty-tip image{
+  display: block;
+  margin: 20px auto;
+  width: 170px;
+  height: 88px;
 }
 .app .bbs .comment-box{
   padding-bottom: 10px;
 }
 .app .bbs .comment-container {
-  padding-bottom: 94rpx;
-  background-color:#fff;
+  padding-bottom: 35.15625rpx;
 }
 .app .bbs .comment {
-  padding: 0 16rpx 0;
-  vertical-align: top;
-  
-}
-.app .bbs .comment:first-child .comment-content {
-  border-top: none;
+  padding-left:23.4375rpx;
+  padding-right:23.4375rpx;
+  padding-top:35.1rpx;
+  padding-bottom:56.25rpx;
+  border-bottom: 1px dashed #e3e3e3;
 }
 .app .bbs .comment .cover-img {
-  display: inline-block;
-  width: 84rpx;
-  height: 84rpx;
-  margin-right: 16rpx;
-  border-radius: 50%;
-  vertical-align: top;
-  border: 1px solid #ddd;
-  margin-top: 20rpx;
+  width: 70.2rpx;
+  height: 70.2rpx;
+  margin-right: 11.71875rpx;
+  border-radius: 9.36rpx;
+  vertical-align: middle;
 }
 .app .bbs .comment .nickname {
-  color: #666;
-  font-size: 28rpx;
+  color: #656565;
+  font-size: 13px;
   display: block;
-  margin-bottom: 20rpx;
 }
 .app .bbs .comment .add-time {
-  font-size: 22rpx;
-  color: #999;
+  float: right;
+  margin-top: 9.375rpx;
+  font-size: 28.125rpx;
+  color: #bfbfbf;
 }
 .app .bbs .comment .comment-content {
-  padding-top: 20rpx;
-  display: inline-block;
-  width: calc(100% - 116rpx - 1px);
+  padding-top: 11.71875rpx;
   word-wrap: break-word;
-  border-top:1px solid #eee;
-  margin-bottom:30rpx;
 }
 .app .bbs .comment .comment-reference-text {
-  margin-right: 5px;
-  color: #6791c2;
-  font-size: 26rpx;
+  margin-bottom: 5px;
+  color: #577a9f;
 }
 .app .bbs .comment .comment-img {
-  display: inline-block;
-  width: 180rpx;
-  height: 180rpx;
-  margin: 0 10rpx 20rpx;
+  width: 262.5rpx;
+  height: 262.5rpx;
 }
 .app .bbs .comment .bbs-content-btn {
   float: right;
   position: relative;
   margin-right: 23.4rpx;
-  font-size: 22rpx;
+  margin-top: 11.7rpx;
+  font-size: 28.125rpx;
   line-height: 32.8125rpx;
   color: #999;
 }
 .app .bbs .comment .bbs-content-btn:before{
   margin-right: 2px;
   vertical-align: text-top;
+}
+.app .bbs .comment .bbs-content-btn.icon-heart {
+  margin-right: 37.5rpx;
 }
 .app .bbs .comment .bbs-content-btn.icon-heart:before {
   color: #888;
@@ -1406,73 +1389,40 @@ a {
   padding-bottom: 0;
   margin-bottom: 11.71875rpx;
 }
-.app .bbs .comment .nickname-wrap {
-  display: block;
+.app .bbs .comment .nickname-wrap{
+  display: inline-block;
   vertical-align: middle;
-}
-.bbs .nickname-wrap label {
-  font-size: 26rpx;
-  color: #333;
-  margin-bottom: 20rpx;
-  display: block;
 }
 .app .bbs {
 	width: 100% !important;
+	padding-left: 3%;
+	padding-right: 3%;
 	background-color: #f3f4f6;
 }
 .app .bbs .comment-amount-p {
-  height: 94rpx;
-  line-height: 94rpx;
-	padding-left: 20px;
-	font-size: 28rpx;
-  background-color:#fff;
-  border-bottom: 1px solid #eee;
-}
-.bbs-fix-btn {
-  position: fixed;
-  z-index: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 94rpx;
-  border: 1px solid #ddd;
-  background-color:#fff;
-}
-.bbs-fix-btn > button {
-  height: 100%;
-  width: calc(50% - 2rpx);
-  vertical-align: top;
-  border-radius: 0;
-  background-color: #fff;
-  position: relative;
-  font-size: 28rpx;
-  line-height:94rpx;
-  color: #666;
-}
-.bbs-fix-btn text {
-  vertical-align: top;
-  display: inline-block;
-  width: 4rpx;
-  height: 40rpx;
-  margin: 27rpx 0;
-  background-color: #ddd; 
-}
-.bbs-fix-btn > button:before{
-  margin-right: 10rpx;
+	padding-top: 15px;
+	padding-bottom: 10px;
+	font-size: 32.8125rpx;
 }
 .app .bbs .ca-span {
   display: inline-block;
-  color: #333;
-  vertical-align:top;
-  height: 94rpx;
   position: relative;
-  margin-right: 10rpx;
+  width: 30px;
+  margin: 0 10px;
+  font-size: 26px;
+  color: #f65110;
+  vertical-align: middle;
 }
-.app .bbs .ca-span text{
-  width: 100%;
+.app .bbs .ca-span .ca-span-num{
+  display: block;
+  width: 30px;
+  text-align: center;
+  color: #fff;
+  font-size: 16px;
+  margin-top: 2px;
+  overflow: hidden;
   position: absolute;
-  bottom: 0;
-  height: 1px;
+  top : 0;
   left: 0;
 }
 .app .bbs .reply-comment-box {
@@ -1593,75 +1543,6 @@ a {
   border: 1px solid #d6d6d8;
   height: 63.18rpx;
 }
-.app .bbs .replyDialog{
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-color: rgba(0,0,0,.5);
-  z-index: 2;
-}
-.bbs .replyDialog> view{
-  position: absolute;
-  width: 702rpx;
-  left: 0;
-  bottom: 0;
-  background-color: #fff;
-  padding: 24rpx;
-  top: 0;
-}
-.bbs .bbs-dialog-title {
-  font-size: 28rpx;
-}
-.bbs .replyDialog textarea {
-  width: calc(100% - 20rpx);
-  height: 160rpx;
-  background-color: #efefef;
-  padding: 10rpx;
-}
-.bbs .selectBbsPic {
-  display: block;
-  float: left;
-  width: 52rpx;
-  height: 70rpx;
-  line-height: 70rpx;
-  font-size:54rpx;
-  color: #999;
-}
-.bbs .bbs-comment-img {
-  width: 140rpx;
-  height: 70rpx;
-  margin: 0 12rpx;
-}
-.bbs .delete-comment-img {
-  border-radius: 50%;
-  position: absolute;
-  left: 138rpx;
-  top: -12rpx;
-  width: 30rpx;
-  height: 30rpx;
-  box-shadow: 0 0 4rpx rgba(0,0,0,.5);
-  background-color: #fff;
-}
-.bbs .delete-comment-img:before{
-  content: '';
-  display: block;
-  width: 10rpx;
-  height: 4rpx;
-  background-color: #999;
-  margin: 14rpx auto;
-}
-.bbs .bbs-publish-btn{
-  display: block;
-  float: right;
-  height: 70rpx;
-  line-height: 70rpx;
-  text-align: center;
-  width: 140rpx;
-  border-radius: 4rpx;
-  color:#fff;
-}
 
 
 .app .count-ele {
@@ -1719,7 +1600,6 @@ a {
 	height: auto !important;
 	color: #fff;
 	font-size: 16px;
-  background-color:rgb(243, 243, 243);
 }
 .app .user-center .show-view {
   position: relative;
@@ -1797,42 +1677,6 @@ a {
   height: 70.3125rpx;
   line-height: 70.3125rpx;
   font-size: 46.875rpx;
-}
-.app .user-center .user-center-content .block-item.mode-one{
-  vertical-align: middle;
-}
-.app .user-center .user-center-content .block-item.mode-one::before
-.app .user-center .user-center-content .block-item.mode-one::after {
-  content: '';
-  display: inline-block;
-  width: 1px;
-  height: 100%;
-  background-color: #000;
-  vertical-align: middle;
-}
-.app .user-center .user-center-content .block-item.mode-one text{
-  display: block;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.app .user-center .usercenter-block{
-  color: rgb(89, 96, 123);
-}
-.app .user-center .block-name {
-  text-indent: 40rpx;
-  height: 88rpx;
-  line-height: 88rpx;
-  border-bottom: 1px solid #F3F3F3;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-}
-.app .user-center .block-detail .mode-two {
-  border-bottom: 1px solid #F3F3F3
-}
-.app .user-center .block-detail .mode-two:last-child{
-  border:none;
 }
 .app .usercenter-mode1 .horizontal-router-container1 {
   overflow: hidden;
@@ -1951,7 +1795,7 @@ a {
 .app .sort .item {
   position: relative;
   display: inline-block;
-  min-width: 164rpx;
+  min-width: 71px;
   text-align: center;
   text-decoration: inherit;
   vertical-align: top;
@@ -1965,7 +1809,7 @@ a {
   position: relative;
   display: inline-block;
   width: 12px;
-  height: 42.75rpx;
+  height: 48.75rpx;
   margin-right: 11.25rpx;
   vertical-align: middle;
 }
@@ -1986,8 +1830,29 @@ a {
 .app .sort .arr-down{
   bottom: 0;
 }
+.another-style {
+  padding: inherit !important;
+  line-height: 50px;
+}
 
+.another-style .location {
+  float: left;
+  width: 25%;
+  text-align: center;
+}
 
+.another-style .search-input{
+  width: 70%!important;
+  display: inline-block;
+  vertical-align:middle;
+  padding-left: 2%!important;
+}
+.fakeSearch {
+  display: inline-block;
+  width: 70%;
+  height: 30px;
+  line-height: 30px;
+}
 
 .app .search{
   background:#efeff4;
@@ -1999,14 +1864,12 @@ a {
   height:30px;
   width:90%;
   padding-left:10px;
-  margin: 0 5%;
+  margin: 0 auto;
   line-height:30px;
   background:#fff;
   border-radius:5px;
   color:#888;
   overflow:hidden;
-  box-sizing: border-box;
-  display: inline-block;
 }
 .app .search .search-input icon {
   height:14px;
@@ -2029,28 +1892,6 @@ a {
   text-align:center;
   background-color:#dfdfdf;
   color:#999;
-}
-.app .search.another-style {
-  padding: inherit !important;
-  line-height: 50px;
-}
-.app .search.another-style .location {
-  float: left;
-  width: 25%;
-  text-align: center;
-}
-.app .search.another-style .search-input{
-  width: 70% !important;
-  display: inline-block;
-  vertical-align:middle;
-  padding-left: 2% !important;
-  margin: 0;
-}
-.fakeSearch {
-  display: inline-block;
-  width: 70%;
-  height: 30px;
-  line-height: 30px;
 }
 .title-ele {
   line-height: 58.5rpx;
@@ -2321,14 +2162,6 @@ a {
   bottom: -4.68rpx;
   right: 11.7rpx;
   color: #555;
-}
-.app .goods-list .title-container .shoppingImage {
-  width: 40rpx;
-  height: 40rpx;
-}
-.app .goods-list .title-container .shoppingImage image{
-  width: 100%;
-  height: 100%;
 }
 
 /*秒杀*/
@@ -2800,7 +2633,6 @@ a {
 .map .map-link {
   margin-top: 5px;
   white-space: pre-wrap;
-  display: inline-block;
 }
 
 .app .code {
@@ -2815,26 +2647,26 @@ a {
 }
 
 .classify-item{
-  position:relative;
-  display: inline-block;
-  width: auto;
-  padding: 0 5px;
+    position:relative;
+    display: inline-block;
+    width: auto;
+    padding: 0 5px;
 }
 
 .classify-item .underline {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 0;
-  width: 100%;
-  border-top: 1px solid rgb(61, 183, 248);
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 0;
+    width: 100%;
+    border-top: 1px solid rgb(61, 183, 248);
 }
 .classify-mode-0-selected{
-  padding-top: .4em;
-  padding-bottom: .4em;
-  border-radius: .4em;
-  background-color: rgb(61, 183, 248);
-  color: #fff;
+    padding-top: .4em;
+    padding-bottom: .4em;
+    border-radius: .4em;
+    background-color: rgb(61, 183, 248);
+    color: #fff;
 }
 .swiper-item {
   display: inline-block;
@@ -3279,8 +3111,8 @@ a {
 }
 .waimai-title .waimai-item-bottom {
   padding:20px 5px 0 0;
-  height: 22px;
-  line-height: 22px;
+  height:22px;
+  line-height:22px;
 }
 .tostore-title .tostore-item-bottom{
   padding:0 5px 5px 0;
@@ -3535,12 +3367,10 @@ a {
   line-height: 88rpx;
   font-weight: 600;
 }
-.takeoutGoodsModelBtn > view, 
-.tostoreGoodsModelBtn > view {
-  position: absolute;
-  right: 0;
-  top: 0;
+.takeoutGoodsModelBtn view,
+.tostoreGoodsModelBtn view {
   height: 88px;
+  float: right;
   background-color: #ff7100;
   color: #fff;
   line-height: 88rpx;
@@ -4069,22 +3899,18 @@ a {
   bottom: 163.8rpx;
   z-index: 20;
 }
-.app .suspension-sideways {
-  display: flex;
-}
 .suspension-item{
   display: block;
+  width: 81.9rpx;
+  height: 81.9rpx;
   background-color: rgba(0,0,0,0.5);
   text-align: center;
   margin-bottom: 2.34rpx;
-  width: 70rpx;
-  height: 70rpx;
 }
 .suspension-item.diy{
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
 }
 .suspension-item > icon{
   line-height: 81.9rpx;
@@ -4112,6 +3938,7 @@ a {
   text-align: center;
   height: 90rpx;
   line-height: 90rpx;
+  font-size: 28.08rpx;
 }
 .loading-btn image{
   display: inline-block;
@@ -4503,98 +4330,6 @@ a {
   height: 100%;
   overflow: hidden;
 }
-.app .new-classify {
-  height: 35px;
-  width: 100%;
-  white-space: nowrap;
-  text-decoration: inherit;
-  line-height: 35px;
-  color: #888;
-  font-size: 13px;
-  background-color: #f2f2f2;
-}
-.app .new-classify .new-classify-item {
-  position: relative;
-  display: inline-block;
-  min-width: 150rpx;
-  text-align: center;
-  text-decoration: inherit;
-  vertical-align: top;
-}
-.app .new-classify .new-classify-item text {
-  padding-left: .7em;
-  padding-right: .7em;
-  white-space: nowrap;
-  text-decoration: inherit;
-}
-.app .new-classify .new-classify-item .underline {
-  display: none;
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 0;
-  width: 100%;
-  border-top: 1px solid rgb(61, 183, 248);
-}
-.app .new-classify.new-classify-mode0 .selected text {
-  padding-top: .4em;
-  padding-bottom: .4em;
-  border-radius: .4em;
-  background-color: rgb(61, 183, 248);
-  color: #fff;
-}
-.app .new-classify.new-classify-mode1 .selected {
-  color: rgb(61, 183, 248);
-}
-.app .new-classify.new-classify-mode1 .selected .underline {
-  display: block;
-}
-.app .new-classify.classify-level-2 .new-classify-item text {
-  padding-right: 1.3em;
-  background-color: transparent;
-  color: inherit;
-}
-.app .new-classify.classify-level-2 .triangle {
-  position: absolute;
-  right: .5em;
-  top: 42.5%;
-  border-left: 3px solid transparent;
-  border-top: 5px solid;
-  border-right: 3px solid transparent;
-}
-.app .new-classify.classify-level-2 .selected .triangle {
-  transform: rotateZ(180deg);
-  border-top: 5px solid #3db7f8;
-}
-.app .new-classify.classify-level-2 .new-classify-item .divide-line {
-  position: absolute;
-  right: 0;
-  top: 15%;
-  border-right: 1px solid #ccc9c9;
-  height: 70%;
-}
-.app .new-classify.classify-level-2 .new-classify-subclassify {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 100%;
-  border-top: 1px solid #ccc9c9;
-  box-sizing: border-box;
-  z-index: 10;
-}
-.app .new-classify.classify-level-2 .sub-classify-item-list {
-  background-color: #f3f4f6;
-}
-.app .new-classify.classify-level-2 .sub-classify-item {
-  height: 38px;
-  line-height: 40px;
-  padding: 0 10px;
-  border-bottom: 1px solid #ccc9c9;
-  margin: 0 10px;
-}
-.app .new-classify.classify-level-2 .sub-classify-item text {
-  padding: .2em .4em;
-}
 .wxParse-inline{
   display: inline;
   margin: 0;
@@ -4798,11 +4533,9 @@ a {
 }
 
 /*视频列表*/
-.video-list{
+.video-list-ul .title {
   font-size: 30rpx;
   color: #3c4a55;
-}
-.video-list-ul .title {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -5059,11 +4792,6 @@ a {
   border-radius: 40rpx;
   overflow: hidden;
 }
-.suspension-item contact-button {
-  height:0;
-  width:0;
-  opacity:0;
-}
 /* 资讯组件样式 */
 .newsIndex-tabs {
   height: 72rpx;
@@ -5190,31 +4918,4 @@ a {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   overflow: hidden;
-}
-.app .popup-window {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 21;
-}
-.app .popup-window-mask {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: -1;
-}
-.app .popup-window-content {
-  position: relative;
-}
-.old-suspension .suspension-item {
-  width: 70rpx;
-  height: 70rpx;
-}
-.suspension .old-and-new {
-  width: 70rpx;
-  height: 70rpx;
 }

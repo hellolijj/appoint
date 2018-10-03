@@ -1,4 +1,3 @@
-
 var app = getApp()
 var util = require('../../../utils/util.js')
 
@@ -22,7 +21,7 @@ Page({
     totalPayment: '',
     shopAddress: '',
     noAdditionalInfo: true,
-    is_group:'',
+    is_group:1,
     to_store:'',
     exchangeCouponData: {
       dialogHidden: true,
@@ -43,8 +42,8 @@ Page({
     this.franchisee_id = options.franchisee || '';
     this.cart_id_arr = options.cart_arr ? decodeURIComponent(options.cart_arr).split(',') : [];
     this.dataInitial();
-    this.is_group = options.is_group || '';
-    this.setData({ is_group: options.is_group,to_store: JSON.parse(options.to_store)});
+    this.is_group = '';
+    this.setData({ is_group: '',to_store: JSON.parse(options.to_store)});
   },
   dataInitial: function () {
     this.getCalculationInfo();
@@ -183,7 +182,7 @@ Page({
         _this.setData({
           selectAddress: info.address,
           discountList: benefits,
-          selectDiscountIndex: selectDiscountIndex ,
+          selectDiscountIndex: '' ,
           selectDiscountInfo: selectDiscountInfo,
           express_fee: info.express_fee,
           discount_cut_price: info.discount_cut_price,
@@ -276,6 +275,9 @@ Page({
         data.selectDiscountInfo = '';
         that.setData(data);
         that.getCalculationInfo();
+        wx.showToast({
+          title: '预约成功',
+        })
       },
       fail: function(res){
         data = {};
@@ -331,12 +333,6 @@ Page({
         selected_benefit = this.data.selectDiscountInfo,
         hasWritedAdditionalInfo = false;
 
-    if (this.data.need_user_address != '0' && this.data.is_self_delivery == 0 && !this.data.selectAddress.id){
-      app.showModal({
-        content: '请添加个人信息'
-      });
-      return;
-    }
     for(var key in this.additional_info){
       if(key !== undefined){
         hasWritedAdditionalInfo = true;
@@ -380,7 +376,10 @@ Page({
         appointment_user_name: this.data.appointment_user_name
       },
       success: function(res){
-        that.payOrder(res.data);
+        wx.reLaunch({
+          url: '/pages/o9j42s2GS3_page10000/o9j42s2GS3_page10000',
+        })
+        // 预约成功，返回预约列表或者主页面。
       },
       fail: function(){
         that.requesting = false;
@@ -671,12 +670,13 @@ Page({
     }
     this.setData(data);
   },
-  exchangeCouponConfirmGoods: function(){
+  exchangeCouponConfirmGoods: function(e){
     let _this = this;
     let goodsInfo = _this.data.exchangeCouponData.goodsInfo;
     let model = goodsInfo.model;
     let selectModels = _this.data.exchangeCouponData.selectModelInfo.models;
     let model_value_str = '';
+    let form_id = e.detail.formId;
     if(selectModels.length > 0){
       model_value_str = '(';
       for (let i = 0; i < selectModels.length; i++) {
