@@ -71,9 +71,11 @@ Page({
   saveUserInfo: function (e) {
     console.log('submit获取数据为：' , e.detail.value)
     var data = this.data.userInfo;
-    data['passport'] = e.detail.passport;
-    data['phone'] = e.detail.telephone;
+    console.log(e.detail.value.passport)
+    data['passport'] = e.detail.value.passport;
+    data['phone'] = e.detail.value.telephone;
     data['formid'] = e.detail.formId;
+    console.log(data)
     app.sendRequest({
       url: '/index.php?r=AppData/saveUserInfo',
       method: 'post',
