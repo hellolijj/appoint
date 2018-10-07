@@ -1,58 +1,43 @@
 <view>
-  <view class="order-detail-section orderDetail-goto-homepage" bindtap="goToHomepage" style="margin-bottom:0;" wx:if="{{ isFromTemplateMsg }}">
-    <view class="ico-moon icon-rightarrow"></view>
-    返回首页
-  </view>
   <view class="order-detail-section top-section">
     <view style="margin-bottom: 18rpx;">预约状态: {{ orderStatus[orderInfo.status] }}</view>
     <view>预约号: {{ orderInfo.order_id }}</view>
   </view>
-  <view wx:if="{{this.data.orderStatus[0]}}" class="order-detail-section" style="border-top:1px solid #e8e8e8;">等待买家付款
-  </view>
+</view>
 
+<view class="order-detail-section" style="margin-bottom: 0; padding-bottom: 0; border-bottom: none;">
+  <view class="goods-list-item" wx:for="{{ orderInfo.goods_info }}" wx:for-item="goods" wx:for-index="goodsIndex" wx:key="">
+    <image class="goods-cover" src="{{ goods.cover }}"></image>
+    <block>
+      <view class="goods-content">
+        <view>{{ goods.goods_name }}</view>
+        <view wx:if="{{ goods.model_value }}" class="goods-model">{{ goods.model_value }}</view>
+      </view>
+    </block>
+  </view>
+</view>
+<view  class="order-detail-section" style="margin-bottom: 0;">预约日期
+  <text class="pull-right">{{ orderInfo.appointment_order_info.appointment_day }}</text>
+</view>
+<view class="order-detail-section" style="margin-bottom: 0;">预约时段
+  <text class="pull-right">{{appointment_interval }}</text>
+</view>
+<view class="order-detail-section" style="margin-bottom: 0;">所在时间段序号
+  <text class="pull-right">{{ orderInfo.queue }}</text>
+</view>
+<view class="order-detail-section">服务时长
+  <text class="pull-right">1</text>
+</view>
 
-  <view class="order-detail-section" style="margin-bottom: 0; padding-bottom: 0; border-bottom: none;">
-    <view class="goods-list-item" wx:for="{{ orderInfo.goods_info }}" wx:for-item="goods" wx:for-index="goodsIndex" wx:key="">
-      <image class="goods-cover" src="{{ goods.cover }}"></image>
-      <block>
-        <view class="goods-content">
-          <view>{{ goods.goods_name }}</view>
-          <view wx:if="{{ goods.model_value }}" class="goods-model">{{ goods.model_value }}</view>
-          <view wx:if="{{ goods.is_benefit_goods }}" class="gift-text">赠品</view>
-        </view>
-      </block>
-    </view>
-  </view>
-  <view wx:if="{{orderInfo.appointment_order_info.appointment_unit_type == 3}}" class="order-detail-section" style="margin-bottom: 0;">起始日期
-    <text  class="pull-right">{{ orderInfo.appointment_order_info.appointment_start_date }}</text>
-  </view>
-  <view wx:else class="order-detail-section" style="margin-bottom: 0;" >预约日期
-    <text class="pull-right">{{ orderInfo.appointment_order_info.appointment_day }}</text>
-  </view>
-  <view wx:if="{{orderInfo.appointment_order_info.appointment_unit_type == 3}}" class="order-detail-section" style="margin-bottom: 0;">结束日期
-    <text class="pull-right">{{ orderInfo.appointment_order_info.appointment_end_date }}</text>
-  </view>
-  <view wx:else class="order-detail-section" style="margin-bottom: 0;">预约时段
-    <text class="pull-right">{{appointment_interval }}</text>
-  </view>
+<view class="order-detail-section" wx:if="{{ orderInfo.remark }}" style="border-top:1px solid #e8e8e8;">
+  <view class="section-title">留言</view>
+  <view class="section-content">{{ orderInfo.remark }}</view>
+</view>
 
-  <view wx:if="{{orderInfo.appointment_order_info.appointment_unit_type == 3}}" class="order-detail-section">预约时间
-    <text class="pull-right">{{ orderInfo.appointment_order_info.appointment_to_store_time }}</text>
-  </view>
-  <view wx:else class="order-detail-section">服务时长
-    <text class="pull-right">1</text>
-  </view>
-
-  <view class="order-detail-section" wx:if="{{ orderInfo.remark }}" style="border-top:1px solid #e8e8e8;">
-    <view class="section-title">留言</view>
-    <view class="section-content">{{ orderInfo.remark }}</view>
-  </view>
-
-  <view class="bottom-nav">
-    <view class="txt-r">
-      <block wx:if="{{ orderInfo.status == 2 }}">
-        <text class="btn" bindtap="cancelOrder">取消预约</text>
-      </block>
-    </view>
+<view class="bottom-nav">
+  <view class="txt-r">
+    <block wx:if="{{ orderInfo.status == 2 }}">
+      <text class="btn" bindtap="cancelOrder">取消预约</text>
+    </block>
   </view>
 </view>
