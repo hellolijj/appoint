@@ -61,29 +61,32 @@ Page({
         cancelText: "no",
         success: function (res) {
           if (res.confirm) {
-            app.sendRequest({
-              url: '/index.php?r=AppShop/AddCart',
-              data: param,
-              success: function (res) {
-                let cart_arr = [res.data],
-                  pagePath = '/eCommerce/pages/previewAppointmentOrder/previewAppointmentOrder?cart_arr=' + cart_arr + '&to_store="12:00"';
-                document.appoint_id = res.data
-                app.sendRequest({
-                  url: '/index.php?r=AppShop/AddDocument',
-                  data: document,
-                  success: function (res) {
-                    app.turnToPage(pagePath, true);
-                  }
-                })
-              }
-            })
-
+          
           } else {
             wx.navigateBack()
           }
         },
       })
     }
+
+    app.sendRequest({
+      url: '/index.php?r=AppShop/AddCart',
+      data: param,
+      success: function (res) {
+        let cart_arr = [res.data],
+          pagePath = '/eCommerce/pages/previewAppointmentOrder/previewAppointmentOrder?cart_arr=' + cart_arr + '&to_store="12:00"';
+        document.appoint_id = res.data
+        app.sendRequest({
+          url: '/index.php?r=AppShop/AddDocument',
+          data: document,
+          success: function (res) {
+            app.turnToPage(pagePath, true);
+          }
+        })
+      }
+    })
+
+    
   },
 
   valueConvert: function (value) {
